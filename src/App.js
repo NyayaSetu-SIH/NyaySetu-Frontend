@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React ,{useEffect} from 'react'
+import { useState } from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import axios from 'axios'
 
-function App() {
+
+// component import
+import Login from './Components/Login/login'
+import Homepage from './Pages/Homepage';
+import Signup from './Components/Login/signup';
+
+
+const App = () => {
+
+  const [User,setUser] = useState(null);
+
+  const getUser = async () =>{
+    
+    try {
+      const url = 'http://localhost:8000/auth/login/success'
+      const {data} =  await axios.get(url ,{withCredentials:true});
+      setUser(data.user._json)
+      
+    } catch (error) {
+      console.log(error); 
+    }
+  };
+
+  useEffect( () =>{
+    getUser();
+  },[])
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <>
+      <Routes >
+        <Route 
+          exact
+          path='/'
+          element={User ? <Homepage user = {User} /> : <Navigate to="/login" />}
+         />
+         <Route 
+           exact
+           path='/login'
+           element = {User ? <Navigate to="/" /> : <Login />} />
+
+          <Route 
+           path='/signup'
+           element={User ? <Navigate to="/" /> : <Signup />} /> 
+       </Routes>
+       </>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
