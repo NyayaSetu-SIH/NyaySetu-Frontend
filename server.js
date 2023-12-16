@@ -5,7 +5,7 @@ import passport from 'passport';
 import cookieSession from 'cookie-session';
 import passportSetup from "./passport.js"
 import authRoute from "./routes/auth.js"
-
+import Connection from './database/db.js';
 
 const app = express();
 dotenv.config();
@@ -32,8 +32,14 @@ app.use(
 
 app.use("/auth",authRoute)
 
+
+
 app.listen(PORT, 
   () => {
     console.log(`Server is running on PORT ${PORT}`);
   }
 )
+const USERNAME = process.env.DB_USERNAME;
+const PASSWORD = process.env.DB_PASSWORD;
+
+Connection(USERNAME,PASSWORD);
