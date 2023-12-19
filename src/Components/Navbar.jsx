@@ -36,7 +36,7 @@ const Navbar = ({ user }) => {
             onBlur={closeDropdown} // Added onBlur event to close dropdown on clicking outside
           >
             <div className="avatar">
-              <img src={user.picture} alt="Avatar" />
+              <img src={user?.picture} alt="Avatar" />
             </div>
             {isDropdownOpen && (
               <div className="dropdown-content">

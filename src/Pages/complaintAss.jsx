@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MdFileUpload } from "react-icons/md";
-import '../Style/complaintAss.css'
+import '../Components/Login/Style/complaintAss.css'
 
 const ComplaintAss = () => {
   const [selectedComplaintIndex, setSelectedComplaintIndex] = useState(null);

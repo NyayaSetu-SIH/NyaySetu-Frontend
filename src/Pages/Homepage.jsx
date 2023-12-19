@@ -1,8 +1,9 @@
 import React from 'react'
 import Navbar from '../Components/Navbar';
-import Faq from '../Components/faq/faq';
+import Faq from './faq';
 import Chat from './Chat';
-
+import ComplaintAss from './complaintAss';
+import Sidebar from '../Components/Login/Sidebar'
 
 const Homepage = (userDetails) => {
   const user = userDetails.user;
@@ -26,6 +27,8 @@ const Homepage = (userDetails) => {
        {/* <Faq /> */}
        {/* <Chat /> */}
        {/* <compla */}
+       {/* <ComplaintAss/> */}
+       <Sidebar />
     </div>
   )
 }

@@ -2,17 +2,16 @@ import React ,{useEffect} from 'react'
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import axios from 'axios'
-
-
+import DashR from './Components/Login/dashR';
+import Sidebar from './Components/Login/Sidebar';
 // component import
 import Login from './Components/Login/login'
 import Homepage from './Pages/Homepage';
 import Chat from './Pages/Chat';
 import Signup from './Components/Login/signup';
-import faq from './Components/faq/faq';
-import Faq from './Components/faq/faq';
 import Navbar from './Components/Navbar';
-
+import ComplaintAss from './Pages/complaintAss';
+import Faq from './Pages/faq';
 const App = () => {
 
   const [User,setUser] = useState(null);
@@ -36,7 +35,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <>
-      <Routes >
+       <Routes >
         <Route 
           exact
           path='/'
@@ -48,20 +47,25 @@ const App = () => {
           element={<Chat user = {User} />}
          />
          <Route 
+          exact
+          path='/faq'
+          element={<Faq />}
+         />
+         <Route 
+          exact
+          path='/ComplaintAss'
+          element={<ComplaintAss />}
+         />
+         <Route 
            exact
            path='/login'
            element = {User ? <Navigate to="/" /> : <Login />} />
-
           <Route 
            path='/signup'
            element={User ? <Navigate to="/" /> : <Signup />} /> 
-           <Route 
-            path='/faq'
-            element={User ? <Navigate to="/faq" /> : <Homepage />}
-           />
        </Routes>
        </>
-    </BrowserRouter>
+    </BrowserRouter> 
   )
 }
 
