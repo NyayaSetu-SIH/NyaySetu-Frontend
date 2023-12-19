@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 const Chat = ({ user }) => {
   const [userInput, setUserInput] = useState('');
-  const [selectedQuery, setSelectedQuery] = useState(null);
-  const [generatedText, setGeneratedText] = useState('Our AI is generating...');
+  const [queryPairs, setQueryPairs] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [querySent, setQuerySent] = useState(false);
   const [chatHistory, setChatHistory] = useState([
     { id: 1, text: "Can you explain legal liability?", type: 'user' },
@@ -21,38 +21,45 @@ const Chat = ({ user }) => {
 
   const handleNewChat = () => {
     setQuerySent(false);
-    setSelectedQuery(null);
+    setQueryPairs([]);
   }
 
   const handleSend = async () => {
     if (userInput.trim() === '') return;
 
     try {
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.REACT_APP_OPEN_API_KEY}`,
-          },
-          body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [
-              {"role": "system", "content": "You are a helpful assistant."},
-              {"role": "user", "content": userInput},
-            ],
-          }),
-        });
-  
-        if (response.ok) {
-          const result = await response.json();
-          // Update state with the generated text
-          setGeneratedText(result.choices[0].message.content);
-        } else {
-          // Handle error response
-          console.error('Error:', response.statusText);
-        }
+      setLoading(true); 
+
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.REACT_APP_OPEN_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": userInput},
+          ],
+        }),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        // Update state with the generated text
+        setQueryPairs((prevPairs) => [
+          ...prevPairs,
+          { query: userInput, generatedText: result.choices[0].message.content }
+        ]);
+      } else {
+        // Handle error response
+        console.error('Error:', response.statusText);
+      }
     } catch (error) {
-        console.error('Error:', error.message);
+      console.error('Error:', error.message);
+    } finally {
+      setLoading(false); 
     }
 
     // Add user's query to chat history
@@ -61,15 +68,14 @@ const Chat = ({ user }) => {
       { id: prevHistory.length + 1, text: userInput, type: 'user' },
     ]);
 
-    // Clear user input and selected query
+    // Clear user input
     setUserInput('');
-    setSelectedQuery(userInput);
     setQuerySent(true);
   };
 
-  const renderDiv = (query) => (
+  const renderDiv = (query, index) => (
     <div
-      key={query}
+      key={index}
       className={`px-4 py-4 rounded-lg my-2 text-xs cursor-pointer ${
         userInput === query ? 'bg-blue-300 text-black' : 'bg-blue-200 text-blue-900'
       }`}
@@ -79,8 +85,30 @@ const Chat = ({ user }) => {
     </div>
   );
 
+  const renderQueryPair = (pair, index) => (
+    <div key={index} className="flex flex-col gap-2 overflow-y-auto">
+      <div className='flex gap-3 p-2'>
+        <div className="rounded-full bg-purple-600 text-white py-1 px-2.5">
+          {user?.name ? user.name.charAt(0).toUpperCase() : 'C'}
+        </div>
+        <div className="flex-1 text-white mx-2">
+          {pair.query}
+        </div>
+      </div>
+
+      <div className='flex gap-3 bg-blue-200 text-black rounded-xl px-4 py-3 shadow-xl relative mb-4'>
+        <div className="rounded-full bg-green-600 text-white m-auto px-2 py-1 absolute top-4 left-2">
+          AI
+        </div>
+        <div className="flex-1 text-black px-4">
+          {pair.generatedText}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="flex h-screen bg-blue-700 text-white">
+    <div className="flex h-screen bg-blue-700 text-white text-lg">
       {/* Left Section - Chat History */}
       <div className="w-1/4 p-4 overflow-y-auto bg-blue-300 rounded-lg m-3 shadow-2xl">
         <div className="text-lg font-bold mb-6 text-black ">NyaySetu Chat</div>
@@ -101,49 +129,35 @@ const Chat = ({ user }) => {
 
       {/* Right Section - User Input and Chat Interface */}
       <div className="w-3/4 p-4 flex flex-col flex-grow justify-between">
-        {querySent === false ? (
-            <div className="flex flex-col items-center justify-center overflow-y-auto">
+        <div className="flex flex-col gap-2 overflow-y-auto flex-grow">
+            {querySent === false ? (
+            <div className="flex flex-col items-center justify-center">
                 <div className="text-lg font-bold mb-4">Welcome to NyaySetu Chat</div>
                 <div className="grid grid-cols-2 gap-2">
-                    {renderDiv("Know your rights as an Indian citizen.")}
-                    {renderDiv("Can I refuse a search of my vehicle or belongings?")}
-                    {renderDiv("What are my rights if I'm stopped by the police?")}
-                    {renderDiv("My rights in case of legal issues.")}
+                {renderDiv("Know your rights as an Indian citizen.", 0)}
+                {renderDiv("Can I refuse a search of my vehicle or belongings?", 1)}
+                {renderDiv("What are my rights if I'm stopped by the police?", 2)}
+                {renderDiv("My rights in case of legal issues.", 3)}
                 </div>
             </div>
-        ) : (
-            <div className="flex flex-col gap-2 overflow-y-auto">
-                <div className='flex gap-3 p-2'>
-                    <div className="rounded-full bg-purple-600 text-white py-1 px-2.5">
-                      {user?.name ? user.name.charAt(0).toUpperCase() : 'C'}
-                    </div>
-                    <div className="flex-1 text-white mx-2">
-                        {selectedQuery}
-                    </div>
-                </div>
-                
-                <div className='flex gap-3 bg-blue-200 text-black rounded-xl px-4 py-3 shadow-xl relative mb-4'>
-                    <div className="rounded-full bg-green-600 text-white m-auto px-2 py-1 absolute top-4 left-2">
-                      AI
-                    </div>
-                    <div className="flex-1 text-black px-4">
-                        {generatedText}
-                    </div>
-                </div>
+            ) : (
+            <div>
+                {queryPairs.map((pair, index) => renderQueryPair(pair, index))}
             </div>
-        )}
+            )}
+        </div>
 
-        <div className="flex items-center mt-2">
-          <input
+        <div className="flex items-center gap-2">
+            <input
             type="text"
             value={userInput}
             onChange={handleInputChange}
-            className="flex-1 p-2 bg-blue-800 text-white rounded-l"
+            className="flex-1 p-2 bg-blue-800 text-white rounded-lg"
             placeholder="Type your query..."
-          />
-          <button onClick={handleSend} className="p-2 bg-blue-600 rounded-r">
-            Send
-          </button>
+            />
+            <button onClick={handleSend} className="py-2 px-4 bg-blue-600 rounded-lg">
+              {loading ? 'Generating...' : 'Send'}
+            </button>
         </div>
       </div>
     </div>

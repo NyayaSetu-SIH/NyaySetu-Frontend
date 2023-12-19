@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Jost", sans-serif;
+  }
+  .nyaySetu-logo:hover {
+  cursor: pointer;
+}
+  .main-nav{
+    width: 100%;
+    height: 6rem;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-top: 0px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    /* flex: 1; */
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, */
+      /* rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
+      border: 1px solid black;
+      /* border-color: red; */
+  }
+
+
+.logo img{
+    width: 100%;
+    height: 5rem;
+    padding-left: 10px;
+}
+
+.notification{
+    width: 40%;
+    height: 8rem;
+    padding-bottom: 3rem;
+}
+
+@media (max-width: 998px) {
+    .main-nav {
+      height: 5rem;
+      /* margin-left: 2rem;
+      margin-right: 2rem; */
+    }
+  
+  
+    .logo img{
+        width: 100%;
+      height: 4rem;
+    }
+
+    .notification{
+        width: 40%;
+        height: 6rem;
+        padding-bottom: 20px;
+    }
+
+}
+
+@media (max-width: 520px) {
+    .main-nav {
+      height: 5rem;
+      
+    }
+  
+  
+    .logo img{
+        width: 100%;
+      height: 3.5rem;
+    }
+
+    .notification{
+        width: 40%;
+        height: 6rem;
+        padding-bottom: 25px;
+    }
+
+}
+
+.nyaySetu-logo{
+    margin-left: 20px;
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.logo {
+  /* Your logo styles */
+}
+
+.notification {
+  display: flex;
+  align-items: center;
+}
+
+.notification-ico {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.avatar-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.avatar {
+  border-radius: 50%;
+  overflow: hidden;
+  height: 3rem;
+  width: 3rem;
+  /* Avatar image size styles */
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
+  display: none;
+}
+.dropdown-content div{
+    font-size: 20px;
+    padding-top: 10px;
+}
+.dropdown-content div:hover{
+    font-weight: 600;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 0.5rem;
+  text-decoration: none;
+  color: #333;
+}
+
+.avatar-dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+  display: block;
+}
