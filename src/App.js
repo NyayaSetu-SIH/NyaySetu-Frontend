@@ -7,6 +7,7 @@ import axios from 'axios'
 // component import
 import Login from './Components/Login/login'
 import Homepage from './Pages/Homepage';
+import Chat from './Pages/Chat';
 import Signup from './Components/Login/signup';
 
 
@@ -38,6 +39,11 @@ const App = () => {
           exact
           path='/'
           element={User ? <Homepage user = {User} /> : <Navigate to="/login" />}
+         />
+         <Route 
+          exact
+          path='/chat'
+          element={<Chat user = {User} />}
          />
          <Route 
            exact
