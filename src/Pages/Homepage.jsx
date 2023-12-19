@@ -1,4 +1,10 @@
 import React from 'react'
+import Navbar from '../Components/Sidebar';
+import Faq from './faq';
+import Chat from './Chat';
+import ComplaintAss from './complaintAss';
+import Sidebar from '../Components/Sidebar'
+import './homepage.css'
 
 const Homepage = (userDetails) => {
   const user = userDetails.user;
@@ -10,13 +16,9 @@ const Homepage = (userDetails) => {
   }
   return (
     <div>
-       <div>{user.name}</div>
-       <div>{user.email}</div>
-       <div>
-          <img src={user.picture} />
-       </div>
-       <div>
-          <button onClick={logout}>LogOut</button>
+       <Sidebar user={user}/>
+       <div className='main-homepage'>
+           
        </div>
     </div>
   )
