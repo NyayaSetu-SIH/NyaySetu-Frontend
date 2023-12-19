@@ -12,6 +12,7 @@ import Signup from './Components/Login/signup';
 import ComplaintAss from './Pages/complaintAss';
 import Faq from './Pages/faq';
 import Navbar from './Components/navbar/navbar';
+
 const App = () => {
 
   const [User,setUser] = useState(null);

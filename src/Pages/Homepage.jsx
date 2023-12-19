@@ -5,6 +5,7 @@ import Chat from './Chat';
 import ComplaintAss from './complaintAss';
 import Sidebar from '../Components/Sidebar'
 import './homepage.css'
+import VoiceAss from '../Components/voice-assisstant/voice';
 
 const Homepage = (userDetails) => {
   const user = userDetails.user;
@@ -16,10 +17,8 @@ const Homepage = (userDetails) => {
   }
   return (
     <div>
-       <Sidebar user={user}/>
-       <div className='main-homepage'>
-           
-       </div>
+       {/* <Sidebar user={user}/> */}
+       <VoiceAss />
     </div>
   )
 }
