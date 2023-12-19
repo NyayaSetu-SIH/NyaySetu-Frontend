@@ -52,6 +52,7 @@ const Chat = ({ user }) => {
           ...prevPairs,
           { query: userInput, generatedText: result.choices[0].message.content }
         ]);
+        window.responsiveVoice.speak(result.choices[0].message.content);
       } else {
         // Handle error response
         console.error('Error:', response.statusText);
@@ -107,8 +108,9 @@ const Chat = ({ user }) => {
     </div>
   );
 
+
   return (
-    <div className="flex h-screen bg-blue-700 text-white text-lg">
+    <div className="flex h-screen bg-blue-700 text-white">
       {/* Left Section - Chat History */}
       <div className="w-1/4 p-4 overflow-y-auto bg-blue-300 rounded-lg m-3 shadow-2xl">
         <div className="text-lg font-bold mb-6 text-black ">NyaySetu Chat</div>
