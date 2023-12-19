@@ -95,3 +95,47 @@
   margin-left: 20px;
   margin-right: 20px;
 }
+.user-avatar{
+  border-radius: 100px;
+  height: 50%;
+  width: 50%;
+}
+.user-avatar-con{
+  display: flex;
+  justify-content: right;
+}
+
+.avatar {
+  border-radius: 50%;
+  overflow: hidden;
+  /* Avatar image size styles */
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
+  display: none;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 0.5rem;
+  text-decoration: none;
+  color: #333;
+}
+
+.avatar-dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+  display: block;
+}
+
+.dropdown-content div:hover{
+  font-weight: 600;
+}
+.equal-sign{
+  font-size: 30px;
+}

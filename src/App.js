@@ -2,16 +2,16 @@ import React ,{useEffect} from 'react'
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import axios from 'axios'
-import DashR from './Components/Login/dashR';
-import Sidebar from './Components/Login/Sidebar';
+// import Sidebar from './Components/Login/Sidebar';
 // component import
 import Login from './Components/Login/login'
 import Homepage from './Pages/Homepage';
 import Chat from './Pages/Chat';
 import Signup from './Components/Login/signup';
-import Navbar from './Components/Navbar';
+// import Navbar from './Components/Sidebar';
 import ComplaintAss from './Pages/complaintAss';
 import Faq from './Pages/faq';
+import Navbar from './Components/navbar/navbar';
 const App = () => {
 
   const [User,setUser] = useState(null);
@@ -35,6 +35,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <>
+      {User && <Navbar user={User} /> } 
        <Routes >
         <Route 
           exact

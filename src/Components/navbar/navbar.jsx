@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React ,{useState} from 'react'
 import { IoIosNotificationsOutline } from "react-icons/io";
 import "./navbar.css";
-import logo_img from "./Login/Assets/logo.png";
-
-const Navbar = ({ user }) => {
+import logoo from '../Login/Assets/logo.png'
+// import { useHistory } from 'react-router-dom';
+const Navbar = ({user}) => {
+  // const history = useHistory();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -15,19 +16,23 @@ const Navbar = ({ user }) => {
       setIsDropdownOpen(false);
     }
   };
-
   const logout = () =>{
     window.open(
       `${process.env.REACT_APP_BACKEND_URL}/auth/logout`,
       "_self"
     )
   }
+  const clickback = () =>{
+
+  }
+
   return (
     <div>
-      <nav className="main-nav">
-        <div className="logo">
-          <img src={logo_img} alt="The logo" />
-        </div>
+      <div className="main-nav">
+         <div className="logo">
+           <img src={logoo} alt='The logo' className='nyaySetu-logo' onClick={clickback}/>
+         </div>
+        <div >
         <div className="notification">
           <IoIosNotificationsOutline className="notification-ico" />
           <div
@@ -36,19 +41,21 @@ const Navbar = ({ user }) => {
             onBlur={closeDropdown} // Added onBlur event to close dropdown on clicking outside
           >
             <div className="avatar">
-              <img src={user?.picture} alt="Avatar" />
+              <img src={user.picture} alt="Avatar" />
             </div>
             {isDropdownOpen && (
               <div className="dropdown-content">
-                <div className="navbar-logout">Settings</div>
-                <div onClick={logout} className="navbar-logout">Logout</div>
+                <div>Settings</div>
+                <div onClick={logout}>Logout</div>
               </div>
             )}
           </div>
         </div>
-      </nav>
+        
+        </div>
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
