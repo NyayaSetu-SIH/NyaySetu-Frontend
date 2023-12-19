@@ -2,8 +2,8 @@ import React ,{useEffect} from 'react'
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import axios from 'axios'
-
-
+import DashR from './Components/Login/dashR';
+import Sidebar from './Components/Login/Sidebar';
 // component import
 import Login from './Components/Login/login'
 import Homepage from './Pages/Homepage';
@@ -13,28 +13,28 @@ import Signup from './Components/Login/signup';
 
 const App = () => {
 
-  const [User,setUser] = useState(null);
+  // const [User,setUser] = useState(null);
 
-  const getUser = async () =>{
+  // const getUser = async () =>{
     
-    try {
-      const url = 'http://localhost:8000/auth/login/success'
-      const {data} =  await axios.get(url ,{withCredentials:true});
-      setUser(data.user._json)
+  //   try {
+  //     const url = 'http://localhost:8000/auth/login/success'
+  //     const {data} =  await axios.get(url ,{withCredentials:true});
+  //     setUser(data.user._json)
       
-    } catch (error) {
-      console.log(error); 
-    }
-  };
+  //   } catch (error) {
+  //     console.log(error); 
+  //   }
+  // };
 
-  useEffect( () =>{
-    getUser();
-  },[])
+  // useEffect( () =>{
+  //   getUser();
+  // },[])
   
   return (
     <BrowserRouter>
       <>
-      <Routes >
+      {/* <Routes >
         <Route 
           exact
           path='/'
@@ -52,8 +52,13 @@ const App = () => {
 
           <Route 
            path='/signup'
-           element={User ? <Navigate to="/" /> : <Signup />} /> 
-       </Routes>
+           element={User
+            < ? <Navigate to="/" /> : <Signup />} /> 
+       </Routes> */}
+       <div className='contents'>
+       <Sidebar/>
+       <DashR/>
+       </div>
        </>
     </BrowserRouter>
   )
