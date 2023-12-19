@@ -9,7 +9,9 @@ import Login from './Components/Login/login'
 import Homepage from './Pages/Homepage';
 import Chat from './Pages/Chat';
 import Signup from './Components/Login/signup';
-
+import faq from './Components/faq/faq';
+import Faq from './Components/faq/faq';
+import Navbar from './Components/Navbar';
 
 const App = () => {
 
@@ -53,6 +55,10 @@ const App = () => {
           <Route 
            path='/signup'
            element={User ? <Navigate to="/" /> : <Signup />} /> 
+           <Route 
+            path='/faq'
+            element={User ? <Navigate to="/faq" /> : <Homepage />}
+           />
        </Routes>
        </>
     </BrowserRouter>

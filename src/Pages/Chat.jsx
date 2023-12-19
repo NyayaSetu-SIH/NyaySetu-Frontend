@@ -80,7 +80,7 @@ const Chat = ({ user }) => {
   );
 
   return (
-    <div className="flex h-screen bg-blue-700 text-white">
+    <div className="flex h-screen bg-blue-700 text-white text-lg">
       {/* Left Section - Chat History */}
       <div className="w-1/4 p-4 overflow-y-auto bg-blue-300 rounded-lg m-3 shadow-2xl">
         <div className="text-lg font-bold mb-6 text-black ">NyaySetu Chat</div>

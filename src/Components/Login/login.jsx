@@ -19,7 +19,7 @@ const login = () => {
         <div style={{color:'#244065' , marginBottom:'30px'}}>hello</div>
           <div className='primary-div'>
               <div className='logo-header'>
-                 <img src={logo} alt='logo' style={{width:'260px' ,height:'100px'}}/>
+                 <img src={logo} alt='logo' style={{width:'280px' ,height:'80px'}}/>
               </div>
               <div className='contianer secondary-div'>
                  <div className='row d-flex justify-content-center flex-row'>
@@ -34,7 +34,7 @@ const login = () => {
                         <div className='d-flex justify-content-center secondary-div-text'
                           onClick={googleAuth}
                         >
-                          <img src={gLogo} alt='glogo' style={{ width: '40px', height: '40px' , marginTop:'auto' , marginBottom:'auto'}}/>
+                          {/* <img src={gLogo} alt='glogo' style={{ width: '40px', height: '40px' , marginTop:'auto' , marginBottom:'auto'}}/> */}
                           <p className=''>Continue with Gmail</p>
                         </div>
                       {/* </Link> */}
@@ -45,7 +45,7 @@ const login = () => {
                       <div className='d-flex justify-content-center'>
                       <div className='d-flex justify-content-center flex-col secondary-div-content'>
                          <div className='sec-div-text'>
-                            <Link to="/signup">Continue with Mobile No</Link>
+                            <Link to="/signup">Continue with Email</Link>
                          </div>
                       </div>
                       </div>

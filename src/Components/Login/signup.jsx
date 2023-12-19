@@ -5,9 +5,7 @@ import './Style/login.css'
 import logo from './Assets/logo.png'
 import login_img from './Assets/login-img.svg'
 import gLogo from './Assets/google-logo.png'
-
-
-const signup = () => {
+const login = () => {
  
   const googleAuth = () =>{
     window.open(
@@ -47,9 +45,8 @@ const signup = () => {
                       <div className='d-flex justify-content-center'>
                       <div className='d-flex justify-content-center flex-col secondary-div-content'>
                          <div className='sec-div-text'>
-                           Sign Up page <Link to="/login">2nd page</Link>
+                            <Link to="/signup">Continue with Email id</Link>
                          </div>
-                         
                       </div>
                       </div>
 
@@ -65,4 +62,4 @@ const signup = () => {
   )
   
 }
-export default signup
+export default login

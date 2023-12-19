@@ -1,4 +1,8 @@
 import React from 'react'
+import Navbar from '../Components/Navbar';
+import Faq from '../Components/faq/faq';
+import Chat from './Chat';
+
 
 const Homepage = (userDetails) => {
   const user = userDetails.user;
@@ -10,14 +14,18 @@ const Homepage = (userDetails) => {
   }
   return (
     <div>
-       <div>{user.name}</div>
+       {/* <div>{user.name}</div>
        <div>{user.email}</div>
        <div>
           <img src={user.picture} />
        </div>
        <div>
           <button onClick={logout}>LogOut</button>
-       </div>
+       </div> */}
+       <Navbar user={user}/>
+       {/* <Faq /> */}
+       {/* <Chat /> */}
+       {/* <compla */}
     </div>
   )
 }
