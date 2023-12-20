@@ -8,7 +8,7 @@ const ComplaintAss = () => {
   const complaintsData = [
     {
       title: "Unfair Trade Practice",
-      description: "Details of the complaint related to unfair trade practices.",
+      description: "Details of complaint related to unfair trade practices.",
       linkUrl: "https://consumerhelpline.gov.in/user/signup.php",
       requiredDocuments: ["Document1", "Document2"],
     },
@@ -20,7 +20,7 @@ const ComplaintAss = () => {
     },
     {
       title: "Deficiency in Service",
-      description: "Details of the complaint related to deficiency in services provided.",
+      description: "Details of complaint related to deficiency in services provided.",
       linkUrl: "https://consumerhelpline.gov.in/user/signup.php",
       requiredDocuments: ["Service contract", "Communication records"],
     },
@@ -50,7 +50,7 @@ const ComplaintAss = () => {
     },
     {
       title: "Workplace Harassment",
-      description: "Details of the complaint related to workplace harassment.",
+      description: "Details of complaint related to workplace harassment.",
       linkUrl: "https://labour.gov.in/lodge-your-complaint",
       requiredDocuments: ["HR complaint form", "Communication records"],
     },
@@ -60,12 +60,12 @@ const ComplaintAss = () => {
       linkUrl: "https://labour.gov.in/lodge-your-complaint",
       requiredDocuments: ["Salary records", "Employment contract"],
     },
-    {
-      title: "Salary Not Paid",
-      description: "Details of the complaint related to salary not being paid.",
-      linkUrl: "https://labour.gov.in/lodge-your-complaint",
-      requiredDocuments: ["Salary records", "Employment contract"],
-    },
+    // {
+    //   title: "Salary Not Paid",
+    //   description: "Details of the complaint related to salary not being paid.",
+    //   linkUrl: "https://labour.gov.in/lodge-your-complaint",
+    //   requiredDocuments: ["Salary records", "Employment contract"],
+    // },
   ];
 
   const handleComplaintClick = (index) => {
@@ -84,9 +84,9 @@ const ComplaintAss = () => {
 
   return (
     <>
-    <div className='container'>
+    <div className='complAss_container'>
       {!selectedComplaint && complaintsData.map((complaint, index) => (
-        <div className="card" key={index} onClick={() => handleComplaintClick(index)}>
+        <div className="complAss_card" key={index} onClick={() => handleComplaintClick(index)}>
           <h2>{complaint.title}</h2>
           <p>{complaint.description}</p>
         </div>
@@ -94,7 +94,7 @@ const ComplaintAss = () => {
 
 {selectedComplaint && (
           <>
-            <div className="selected-response-container">
+            <div className="selected-response-container pb-15">
             <div className="card selected-card">
               <h2>{selectedComplaint.title}</h2>
               <p>{selectedComplaint.description}</p>
@@ -107,18 +107,19 @@ const ComplaintAss = () => {
           </div>
           </>
         )}
-      <div className="text-input-container">
+      
+      </div>
+      <div className="text-input-container flex justify-evenly ">
         <input
           type="text"
           placeholder="Type your custom complaint here..."
           value={customComplaint}
           onChange={handleCustomComplaintChange}
         />
-        <MdFileUpload
+        {/* <MdFileUpload
             onClick={handleCustomComplaintUpload}
-            style={{ cursor: 'pointer', marginLeft: '10px', color: '#333' }}
-          />
-      </div>
+            style={{ cursor: 'pointer', marginLeft: '5px', color: '#333', height: '50px' }}
+          /> */}
       </div>
     </>
   );

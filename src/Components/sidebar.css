@@ -1,4 +1,4 @@
-*{
+/* *{
     margin:0;
     padding:0;
     text-decoration: none;
@@ -21,10 +21,10 @@
 main {
   width: calc(100% - 200px); /* Push content with padding */
   /* OR: flex: 1; /* Flexbox approach */
-  padding: 20px;
-}
+  /* padding: 20px; */
 
-.top_section{
+
+/* .top_section{
     display: flex;
     align-items:center;
     padding:20px 15px;
@@ -66,12 +66,11 @@ main {
     /* margin-bottom: 0px; */
     border-color: red;
     /* display: flex!important; */
-    padding-left: 80px;
-}
-.sidebar-childs{
+    /* padding-left: 80px; */
+
+/* .sidebar-childs{
     display: flex;
     /* background-color: red; */
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 300px;
-}
+    /* flex-direction: column;
+    justify-content: space-between; */
+    /* gap: 300px; */

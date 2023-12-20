@@ -1,7 +1,9 @@
 import React ,{useState} from 'react'
+import { Link } from 'react-router-dom';
 import { IoIosNotificationsOutline } from "react-icons/io";
 import "./navbar.css";
-import logoo from '../Login/Assets/logo.png'
+import logoo from '../Login/Assets/logo.jpg'
+
 // import { useHistory } from 'react-router-dom';
 const Navbar = ({user}) => {
   // const history = useHistory();
@@ -27,15 +29,22 @@ const Navbar = ({user}) => {
   }
 
   return (
-    <div>
-      <div className="main-nav">
+    <div className='navbar-container'>
+      <div className="main-nav bg-sky-950">
          <div className="logo">
-           <img src={logoo} alt='The logo' className='nyaySetu-logo' onClick={clickback}/>
+           <Link to="/"><img src={logoo} alt='The logo' className='nyaySetu-logo' onClick={clickback}/></Link>
          </div>
         <div >
+
+
+
         <div className="notification">
+          <div>
           <IoIosNotificationsOutline className="notification-ico" />
-          <div
+          </div>
+          
+          
+          <div 
             className="avatar-dropdown"
             onClick={toggleDropdown}
             onBlur={closeDropdown} // Added onBlur event to close dropdown on clicking outside
@@ -43,6 +52,8 @@ const Navbar = ({user}) => {
             <div className="avatar">
               <img src={user.picture} alt="Avatar" />
             </div>
+
+
             {isDropdownOpen && (
               <div className="dropdown-content">
                 <div>Settings</div>
@@ -53,7 +64,9 @@ const Navbar = ({user}) => {
         </div>
         
         </div>
+        
       </div>
+      <hr/>
     </div>
   )
 }

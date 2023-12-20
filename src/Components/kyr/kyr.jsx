@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/legalChatbot.css';
+import '../styles/legalChatbot.css'; 
 
 const DecisionNode = ({ question, options, handleOptionClick }) => {
   const isLeaf = !options;
   return (
-    <div className="decision-node">
-      <p>{question}</p>
+    <div className="decision-node p-4 bg-gray-200 rounded mb-4">
+      <p className="mb-2">{question}</p>
       {!isLeaf && (
-        <div className="options">
+        <div className="options flex flex-col">
           {options.map((option, index) => (
-            <button key={index} onClick={() => handleOptionClick(option.action, option.label)}>
+            <button
+              key={index}
+              onClick={() => handleOptionClick(option.action, option.label)}
+              className="bg-green-500 text-white rounded px-4 py-2 mb-2 cursor-pointer transition duration-300 hover:bg-green-600"
+            >
               {option.label}
             </button>
           ))}
@@ -24,9 +28,11 @@ const LegalChatDecisionTree = () => {
   const [currentNode, setCurrentNode] = useState(initialDecisionTree);
   const [isLoading, setIsLoading] = useState(false);
   const [isSelected, cardSelected] = useState(false);
+
   const handleOptionClick = (action, label) => {
     setIsLoading(true);
     cardSelected(true);
+
     // Simulate a 3-second delay before changing the node
     setTimeout(() => {
       const nextNode = action();
@@ -36,20 +42,15 @@ const LegalChatDecisionTree = () => {
     }, 2000);
   };
 
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
-
   return (
     <div className="legal-chat-container">
-      <div className="chat-card right-card">
+      <div className="chat-card right-card w-60 p-4 bg-gray-200 rounded shadow-md">
         <DecisionNode {...currentNode} handleOptionClick={(action, label) => handleOptionClick(action, label)} />
-        {isLoading && <div className="loading">Loading...</div>}
+        {isLoading && <div className="loading mt-2 text-gray-500 italic text-center text-sm">Loading...</div>}
       </div>
     </div>
   );
 };
-
 
 const initialDecisionTree = {
   question: "Which kind of loss?",
