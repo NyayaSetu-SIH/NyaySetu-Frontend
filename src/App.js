@@ -9,7 +9,7 @@ import Homepage from './Pages/Homepage';
 import Chat from './Pages/Chat';
 import Signup from './Components/Login/signup';
 // import Navbar from './Components/Sidebar';
-import ComplaintAss from './Pages/complaintAss';
+//import ComplaintAss from './Pages/complaintAss';
 import Faq from './Pages/faq';
 import Navbar from './Components/navbar/navbar';
 import LegalChatDecisionTree from './Components/kyr/kyr'; 
@@ -54,11 +54,11 @@ const App = () => {
           path='/faq'
           element={<Faq />}
          />
-         <Route 
+         {/* <Route 
           exact
           path='/ComplaintAss'
           element={<ComplaintAss />}
-         />
+         /> */}
          <Route 
            exact
            path='/login'

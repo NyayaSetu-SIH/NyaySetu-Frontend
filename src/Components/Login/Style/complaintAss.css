@@ -4,21 +4,20 @@ body {
   background-color: #f4f4f4;
 }
 
-.container {
+.complAss_container {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  height: 150vh;
+  flex-direction: row;
+  max-width: 100px;
 }
 
-.card {
+.complAss_card {
   
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 15px;
   margin: 10px;
-  width: 200px; /* Adjust this value as needed */
+  max-width: 200px; /* Adjust this value as needed */
   height: 200px; /* Set height to be the same as the width */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
@@ -31,29 +30,31 @@ body {
 
 .card:hover {
   background-color: #f0f0f0;
-  transform: scale(1.1); /* Zoom in effect on hover */
+  transform: scale(1.01); /* Zoom in effect on hover */
+  border-color: #244065;
+  box-shadow: #244065 ;
 }
 
 h2 {
-  color: #333;
+  color: #0b0b0b;
   font-weight: 700;
   font-size: 1.2em; /* Adjust the font size */
-  margin-bottom: 5px; /* Add some spacing between title and description */
+  margin-bottom: 2px; /* Add some spacing between title and description */
 }
 
 p {
-  color: #666;
+  color: #244065;
   font-size: 0.9em; /* Adjust the font size */
 }
 
 .text-input-container {
   position: fixed;
-  bottom: 0;
+  bottom: 0rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 70%; /* Adjust the width as needed */
-  background-color: #fff;
-  padding: 10px;
+  width: 50%; /* Adjust the width as needed */
+  background-color:#244065 ;
+  padding: 5px;
   box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
 }
 

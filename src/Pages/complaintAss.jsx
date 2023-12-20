@@ -18,12 +18,12 @@ const ComplaintAss = () => {
       linkUrl: "https://consumerhelpline.gov.in/user/signup.php",
       requiredDocuments: ["Product receipt", "Defect evidence"],
     },
-    // {
-    //   title: "Deficiency in Service",
-    //   description: "Details of complaint related to deficiency in services provided.",
-    //   linkUrl: "https://consumerhelpline.gov.in/user/signup.php",
-    //   requiredDocuments: ["Service contract", "Communication records"],
-    // },
+    {
+      title: "Deficiency in Service",
+      description: "Details of complaint related to deficiency in services provided.",
+      linkUrl: "https://consumerhelpline.gov.in/user/signup.php",
+      requiredDocuments: ["Service contract", "Communication records"],
+    },
     {
       title: "Theft",
       description: "Details of the complaint related to theft.",
@@ -84,9 +84,9 @@ const ComplaintAss = () => {
 
   return (
     <>
-    <div className='container'>
+    <div className='complAss_container'>
       {!selectedComplaint && complaintsData.map((complaint, index) => (
-        <div className="card" key={index} onClick={() => handleComplaintClick(index)}>
+        <div className="complAss_card" key={index} onClick={() => handleComplaintClick(index)}>
           <h2>{complaint.title}</h2>
           <p>{complaint.description}</p>
         </div>
@@ -94,7 +94,7 @@ const ComplaintAss = () => {
 
 {selectedComplaint && (
           <>
-            <div className="selected-response-container">
+            <div className="selected-response-container pb-15">
             <div className="card selected-card">
               <h2>{selectedComplaint.title}</h2>
               <p>{selectedComplaint.description}</p>
@@ -107,18 +107,19 @@ const ComplaintAss = () => {
           </div>
           </>
         )}
-      <div className="text-input-container">
+      
+      </div>
+      <div className="text-input-container flex justify-evenly ">
         <input
           type="text"
           placeholder="Type your custom complaint here..."
           value={customComplaint}
           onChange={handleCustomComplaintChange}
         />
-        <MdFileUpload
+        {/* <MdFileUpload
             onClick={handleCustomComplaintUpload}
-            style={{ cursor: 'pointer', marginLeft: '10px', color: '#333' }}
-          />
-      </div>
+            style={{ cursor: 'pointer', marginLeft: '5px', color: '#333', height: '50px' }}
+          /> */}
       </div>
     </>
   );
