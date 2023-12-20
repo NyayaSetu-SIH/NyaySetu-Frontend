@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import useClipboard from "react-use-clipboard";
 import 'regenerator-runtime/runtime';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { FaMicrophone, FaStop, FaVolumeUp, FaPaperPlane } from 'react-icons/fa';
+import { FaMicrophone, FaStop, FaVolumeUp, FaPaperPlane, FaArrowUp } from 'react-icons/fa';
 import tts from 'tts-js';
 const Chat = ({ user }) => {
   const [userInput, setUserInput] = useState('');
@@ -12,11 +12,19 @@ const Chat = ({ user }) => {
   const [querySent, setQuerySent] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedLang, setSelectedLang] = useState('');
   const [chatHistory, setChatHistory] = useState([
     { id: 1, text: "Can you explain legal liability?", type: 'user' },
     { id: 2, text: "How does intellectual property work?", type: 'user' },
     { id: 3, text: "What are the steps to file a patent?", type: 'user' },
   ]);
+  const languageOptions = [
+    'Assamese', 'Bengali', 'Bodo', 'Dogri', 'English', 'Gujarati', 'Hindi',
+    'Kannada', 'Kashmiri', 'Konkani', 'Maithili', 'Malayalam', 'Manipuri',
+    'Marathi', 'Nepali', 'Odia', 'Punjabi', 'Sanskrit', 'Santali', 'Sindhi',
+    'Tamil', 'Telugu', 'Urdu'
+  ];
 
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
@@ -34,10 +42,16 @@ const Chat = ({ user }) => {
     setIsSpeaking(true);
     window.responsiveVoice.speak(userOut);
   };
+
   const handleStop = () => {
     setIsSpeaking(false);
     window.responsiveVoice.cancel();
   }
+
+  const handleLanguageSelect = (lang) => {
+    setSelectedLang(lang);
+    setIsOpen(false);
+  };
 
   const handleSend = async () => {
     let content = userInput.trim();
@@ -70,10 +84,11 @@ const Chat = ({ user }) => {
       if (response.ok) {
         const result = await response.json();
         // Update state with the generated text
-        setQueryPairs((prevPairs) => [
-          ...prevPairs,
-          { query: userInput, generatedText: result.choices[0].message.content }
-        ]);
+        translateResult(result.choices[0].message.content);
+        // setQueryPairs((prevPairs) => [
+        //   ...prevPairs,
+        //   { query: userInput, generatedText: result.choices[0].message.content }
+        // ]);
         // window.responsiveVoice.speak(result.choices[0].message.content);
         setUserOut(result.choices[0].message.content)
       } else {
@@ -96,6 +111,43 @@ const Chat = ({ user }) => {
     setUserInput('');
     setQuerySent(true);
   };
+
+  const translateResult = async (result) => {
+    let inputLanguage = "English"
+    let outputLanguage = selectedLang;
+    let inputText = result;
+    try {
+      const requestData = {
+        inputText,
+        inputLanguage,
+        outputLanguage
+      };
+
+      const response1 = await fetch('http://localhost:8000/translate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+      });
+
+
+      if (!response1.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response1.json();
+      setQueryPairs((prevPairs) => [
+        ...prevPairs,
+        { query: userInput, generatedText: data.translatedText }
+      ]);
+      
+      //setUserOut(data.translatedText);
+      console.log(queryPairs);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   const renderDiv = (query, index) => (
     <div
@@ -188,14 +240,35 @@ const Chat = ({ user }) => {
             </div>
             )}
         </div>
-
+        
         <div className="flex items-center gap-2">
+            <div className="relative">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="py-2.5 px-1 bg-blue-600 rounded-lg text-xs w-28"
+              >
+                {selectedLang || 'Select Lang'}
+              </button>
+              {isOpen && (
+                <div className="absolute bottom-full right-0 z-10 bg-gray-800 p-2 rounded-lg shadow-lg max-h-40 overflow-y-auto w-28">
+                  {languageOptions.map((lang) => (
+                    <div
+                      key={lang}
+                      className="cursor-pointer p-2 hover:bg-gray-600 text-white text-xs"
+                      onClick={() => handleLanguageSelect(lang)}
+                    >
+                      {lang}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <input
-            type="text"
-            value={userInput}
-            onChange={handleInputChange}
-            className="flex-1 p-2 bg-indigo-50 text-gray-800 rounded-lg"
-            placeholder="Type your query..."
+              type="text"
+              value={userInput}
+              onChange={handleInputChange}
+              className="flex-1 p-2 bg-indigo-50 text-gray-800 rounded-lg"
+              placeholder="Type your query..."
             />
             {isListening ? 
              <button className='text-sm rounded-full p-2.5' onClick={stopListening}><FaStop /></button> :
