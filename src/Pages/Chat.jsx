@@ -84,21 +84,22 @@ const Chat = ({ user }) => {
       if (response.ok) {
         const result = await response.json();
         // Update state with the generated text
-        if(selectedLang === '' || selectedLang === 'English') {
+        //if(selectedLang === '' || selectedLang === 'English') {
           setQueryPairs((prevPairs) => [
             ...prevPairs,
             { query: userInput, generatedText: result.choices[0].message.content }
           ]);
-        } else {
-          translateResult(result.choices[0].message.content);
-        }
+          setUserOut(result.choices[0].message.content)
+        // } else {
+        //   translateResult(result.choices[0].message.content);
+        // }
         
         // setQueryPairs((prevPairs) => [
         //   ...prevPairs,
         //   { query: userInput, generatedText: result.choices[0].message.content }
         // ]);
         // window.responsiveVoice.speak(result.choices[0].message.content);
-        setUserOut(result.choices[0].message.content)
+        //setUserOut(result.choices[0].message.content)
       } else {
         // Handle error response
         console.error('Error:', response.statusText);
@@ -150,7 +151,7 @@ const Chat = ({ user }) => {
         { query: userInput, generatedText: data.translatedText }
       ]);
       
-      //setUserOut(data.translatedText);
+      setUserOut(data.translatedText);
       console.log(queryPairs);
     } catch (error) {
       console.error('Error:', error);
@@ -194,7 +195,12 @@ const Chat = ({ user }) => {
 
   const startListening = () => {
     setIsListening(true);
-    SpeechRecognition.startListening({ continuous: true, language: 'en-In' });
+    if(selectedLang === 'Hindi') {
+      SpeechRecognition.startListening({ continuous: true, language: 'hi-IN' });
+    } else {
+      SpeechRecognition.startListening({ continuous: true, language: 'en-In' });
+    }
+    
   }
   const stopListening = () => {
     setIsListening(false);
