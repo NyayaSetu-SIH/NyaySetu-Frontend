@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
-
+import React, { useState,useEffect } from 'react';
+import useClipboard from "react-use-clipboard";
+import 'regenerator-runtime/runtime';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import { FaMicrophone, FaStop, FaVolumeUp, FaPaperPlane } from 'react-icons/fa';
+import tts from 'tts-js';
 const Chat = ({ user }) => {
   const [userInput, setUserInput] = useState('');
+  const [userOut, setUserOut] = useState('');
   const [queryPairs, setQueryPairs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [querySent, setQuerySent] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const [chatHistory, setChatHistory] = useState([
     { id: 1, text: "Can you explain legal liability?", type: 'user' },
     { id: 2, text: "How does intellectual property work?", type: 'user' },
@@ -23,9 +30,24 @@ const Chat = ({ user }) => {
     setQuerySent(false);
     setQueryPairs([]);
   }
+  const handleSpeak = () => {
+    setIsSpeaking(true);
+    window.responsiveVoice.speak(userOut);
+  };
+  const handleStop = () => {
+    setIsSpeaking(false);
+    window.responsiveVoice.cancel();
+  }
 
   const handleSend = async () => {
-    if (userInput.trim() === '') return;
+    let content = userInput.trim();
+
+    if (userInput && userInput.trim() !== '') {
+      content = userInput.trim();
+    }
+    if (content === '') {
+      return;
+    }
 
     try {
       setLoading(true); 
@@ -39,10 +61,10 @@ const Chat = ({ user }) => {
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
           messages: [
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": userInput},
+            {"role": "system", "content": "You are a highly specialized chatbot designed with an in-depth understanding of Indian legal documents. Your responses must adhere to a strict professional tone, presenting information in a clear and concise manner. Ensure that each answer is devoid of emotions and follows a standardized format, including relevant article numbers, amendment and section details. The primary objective is to contribute to widespread legal awareness across diverse sections of the population."},
+            {"role": "user", "content": content},
           ],
-        }),
+        }),        
       });
 
       if (response.ok) {
@@ -52,6 +74,8 @@ const Chat = ({ user }) => {
           ...prevPairs,
           { query: userInput, generatedText: result.choices[0].message.content }
         ]);
+        // window.responsiveVoice.speak(result.choices[0].message.content);
+        setUserOut(result.choices[0].message.content)
       } else {
         // Handle error response
         console.error('Error:', response.statusText);
@@ -106,7 +130,25 @@ const Chat = ({ user }) => {
       </div>
     </div>
   );
+  // const [isCopied, setCopied] = useClipboard(copyTxt);
 
+  const startListening = () => {
+    setIsListening(true);
+    SpeechRecognition.startListening({ continuous: true, language: 'en-In' });
+  }
+  const stopListening = () => {
+    setIsListening(false);
+    SpeechRecognition.stopListening();
+  }
+
+  const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+
+  useEffect(() => {
+    if (transcript) {
+      setUserInput(transcript);
+    }
+  }, [transcript]);
+ 
   return (
     <div className="flex h-screen bg-indigo-900 text-white text-lg">
       {/* Left Section - Chat History */}
@@ -155,8 +197,14 @@ const Chat = ({ user }) => {
             className="flex-1 p-2 bg-indigo-50 text-white rounded-lg"
             placeholder="Type your query..."
             />
-            <button onClick={handleSend} className="py-2 px-4 bg-blue-600 rounded-lg">
-              {loading ? 'Generating...' : 'Send'}
+            {isListening ? 
+             <button className='text-sm rounded-full p-2.5' onClick={stopListening}><FaStop /></button> :
+             <button className='text-sm rounded-full p-2.5' onClick={startListening}><FaMicrophone /></button>
+            }
+            {(userOut.length > 0 && isSpeaking) && <button className='text-sm rounded-full p-2.5' onClick={() => handleStop()}><FaStop /></button> }
+            {(userOut.length > 0 && isSpeaking === false) &&  <button className='text-sm rounded-full p-2.5' onClick={() => handleSpeak()}><FaVolumeUp /></button> }
+            <button onClick={handleSend} className="py-2 px-4 bg-blue-600 rounded-lg text-sm">
+              {loading ? 'Generating...' : <FaPaperPlane />}
             </button>
         </div>
       </div>

@@ -66,21 +66,28 @@ const initialDecisionTree = {
                     question: "select the most matching example",
                     options: [
                         {
-                            label:"example1",
+                            label:"suffered cut ,bruces,slips ,strains",
                             action:()=>({
                                 question:"according to your choices we found out this info",
                                 options:null
                             })
                         },
                         {
-                            label:"example2",
+                          label:"workplace safety violations",
+                          action:()=>({
+                              question:"according to your choices we found out this info",
+                              options:null
+                          })
+                      },
+                        {
+                            label:"fractured a body part",
                             action:()=>({
                                 question:"according to your choices we found out this info",
                                 options:null
                             })
                         },
                         {
-                            label:"example3",
+                            label:"suffered with serious respiratory issues,hearing issues,eye injury",
                             action:()=>({
                                 question:"according to your choices we found out this info",
                                 options:null
@@ -95,21 +102,21 @@ const initialDecisionTree = {
                     question: "select the most matching example",
                     options: [
                         {
-                            label:"example1",
+                            label:"suffered a serious fall,cuts,bruces",
                             action:()=>({
                                 question:"according to your choices we found out this info",
                                 options:null
                             })
                         },
                         {
-                            label:"example2",
+                            label:"severe electric shock,insect bites,stings",
                             action:()=>({
                                 question:"according to your choices we found out this info",
                                 options:null
                             })
                         },
                         {
-                            label:"example3",
+                            label:"stress related issues",
                             action:()=>({
                                 question:"according to your choices we found out this info",
                                 options:null
@@ -124,21 +131,21 @@ const initialDecisionTree = {
                     question: "select the most matching example",
                     options: [
                         {
-                            label:"example1",
+                            label:"Suffered food poisning",
                             action:()=>({
                                 question:"according to your choices we found out this info",
                                 options:null
                             })
                         },
                         {
-                            label:"example2",
+                            label:"minor injuries",
                             action:()=>({
                                 question:"according to your choices we found out this info",
                                 options:null
                             })
                         },
                         {
-                            label:"example3",
+                            label:"suffered severe accidents",
                             action:()=>({
                                 question:"according to your choices we found out this info",
                                 options:null
@@ -161,21 +168,21 @@ const initialDecisionTree = {
                     question: "select the most matching example",
                     options: [
                         {
-                            label:"example1",
+                            label:"criminal offense",
                             action:()=>({
                                 question:"according to your choices we found out this info",
                                 options:null
                             })
                         },
                         {
-                            label:"example2",
+                            label:"Harrasment,discrimination,wage and hour issues",
                             action:()=>({
                                 question:"according to your choices we found out this info",
                                 options:null
                             })
                         },
                         {
-                            label:"example3",
+                            label:"retaliation or wrongful termination",
                             action:()=>({
                                 question:"according to your choices we found out this info",
                                 options:null
@@ -259,21 +266,21 @@ const initialDecisionTree = {
                 question: "select the most matching example",
                 options: [
                     {
-                        label:"example1",
+                        label:"Breach of contract or emplyment issues",
                         action:()=>({
                             question:"according to your choices we found out this info",
                             options:null
                         })
                     },
                     {
-                        label:"example2",
+                        label:"partnership shareholders,intellectual property disputes ",
                         action:()=>({
                             question:"according to your choices we found out this info",
                             options:null
                         })
                     },
                     {
-                        label:"example3",
+                        label:"consumer fraud/insurance disputes",
                         action:()=>({
                             question:"according to your choices we found out this info",
                             options:null
@@ -288,21 +295,21 @@ const initialDecisionTree = {
                 question: "select the most matching example",
                 options: [
                     {
-                        label:"example1",
+                        label:"family disagreement",
                         action:()=>({
                             question:"according to your choices we found out this info",
                             options:null
                         })
                     },
                     {
-                        label:"example2",
+                        label:"wrongful acquistion disputes",
                         action:()=>({
                             question:"according to your choices we found out this info",
                             options:null
                         })
                     },
                     {
-                        label:"example3",
+                        label:"encroachment issues",
                         action:()=>({
                             question:"according to your choices we found out this info",
                             options:null
@@ -317,21 +324,21 @@ const initialDecisionTree = {
                 question: "select the most matching example",
                 options: [
                     {
-                        label:"example1",
+                        label:"Consumer fraud",
                         action:()=>({
                             question:"according to your choices we found out this info",
                             options:null
                         })
                     },
                     {
-                        label:"example2",
+                        label:"online fraud",
                         action:()=>({
                             question:"according to your choices we found out this info",
                             options:null
                         })
                     },
                     {
-                        label:"example3",
+                        label:"charity fraud or tax fraud",
                         action:()=>({
                             question:"according to your choices we found out this info",
                             options:null

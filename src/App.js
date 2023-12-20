@@ -12,6 +12,7 @@ import Signup from './Components/Login/signup';
 import ComplaintAss from './Pages/complaintAss';
 import Faq from './Pages/faq';
 import Navbar from './Components/navbar/navbar';
+import LegalChatDecisionTree from './Components/kyr/kyr'; 
 
 const App = () => {
 
@@ -62,6 +63,11 @@ const App = () => {
            exact
            path='/login'
            element = {User ? <Navigate to="/" /> : <Login />} />
+           <Route
+           exact
+           path='/kyr'
+           element={<LegalChatDecisionTree/>}
+           />
           <Route 
            path='/signup'
            element={User ? <Navigate to="/" /> : <Signup />} /> 
