@@ -6,7 +6,7 @@ import ComplaintAss from './complaintAss';
 import Sidebar from '../Components/Sidebar'
 import './homepage.css'
 import VoiceAss from '../Components/voice-assisstant/voice';
-
+import { Dashboard } from '../Components/dashboard';
 const Homepage = (userDetails) => {
   const user = userDetails.user;
   const logout = () =>{
@@ -16,9 +16,10 @@ const Homepage = (userDetails) => {
     )
   }
   return (
-    <div>
+    <div >
        {/* <Sidebar user={user}/> */}
-       <VoiceAss />
+       {/* <VoiceAss /> */}
+       <Dashboard/>
     </div>
   )
 }

@@ -101,7 +101,7 @@ const Chat = ({ user }) => {
     <div
       key={index}
       className={`px-4 py-4 rounded-lg my-2 text-xs cursor-pointer ${
-        userInput === query ? 'bg-blue-300 text-black' : 'bg-blue-200 text-blue-900'
+        userInput === query ? ' bg-slate-800 text-black' : 'bg-indigo-500 text-white'
       }`}
       onClick={() => handleDivClick(query)}
     >
@@ -112,7 +112,7 @@ const Chat = ({ user }) => {
   const renderQueryPair = (pair, index) => (
     <div key={index} className="flex flex-col gap-2 overflow-y-auto">
       <div className='flex gap-3 p-2'>
-        <div className="rounded-full bg-purple-600 text-white py-1 px-2.5">
+        <div className="rounded-full bg-slate-900 text-white py-1 px-2.5">
           {user?.name ? user.name.charAt(0).toUpperCase() : 'C'}
         </div>
         <div className="flex-1 text-white mx-2">
@@ -120,7 +120,7 @@ const Chat = ({ user }) => {
         </div>
       </div>
 
-      <div className='flex gap-3 bg-blue-200 text-black rounded-xl px-4 py-3 shadow-xl relative mb-4'>
+      <div className='flex gap-3 bg-indigo-900 text-black rounded-xl px-4 py-3 shadow-xl relative mb-4'>
         <div className="rounded-full bg-green-600 text-white m-auto px-2 py-1 absolute top-4 left-2">
           AI
         </div>
@@ -150,21 +150,21 @@ const Chat = ({ user }) => {
   }, [transcript]);
  
   return (
-    <div className="flex h-screen bg-blue-700 text-white">
+    <div className="flex h-screen bg-indigo-900 text-white text-lg">
       {/* Left Section - Chat History */}
-      <div className="w-1/4 p-4 overflow-y-auto bg-blue-300 rounded-lg m-3 shadow-2xl">
+      <div className="w-1/4 p-4 overflow-y-auto  bg-white rounded-lg m-3 shadow-2xl">
         <div className="text-lg font-bold mb-6 text-black ">NyaySetu Chat</div>
         {chatHistory.map((message) => (
           <div
             key={message.id}
             className={`bg-white text-black px-2 py-2 rounded-lg my-2 text-xs ${
-              message.type === 'bot' ? 'text-blue-300' : ''
+              message.type === 'bot' ? 'bg-indigo-900' : ''
             }`}
           >
             {message.text}
           </div>
         ))}
-        <div className="flex items-center bg-blue-600 rounded-lg shadow-xl cursor-pointer" onClick={handleNewChat}>
+        <div className="flex items-center bg-indigo-900 rounded-lg shadow-xl cursor-pointer" onClick={handleNewChat}>
           <div className="mx-auto my-2 text-white">+</div>
         </div>
       </div>
@@ -191,11 +191,11 @@ const Chat = ({ user }) => {
 
         <div className="flex items-center gap-2">
             <input
-              type="text"
-              value={userInput}
-              onChange={handleInputChange}
-              className="flex-1 p-2 bg-blue-800 text-white rounded-lg"
-              placeholder="Type your query..."
+            type="text"
+            value={userInput}
+            onChange={handleInputChange}
+            className="flex-1 p-2 bg-indigo-50 text-white rounded-lg"
+            placeholder="Type your query..."
             />
             {isListening ? 
              <button className='text-sm rounded-full p-2.5' onClick={stopListening}><FaStop /></button> :

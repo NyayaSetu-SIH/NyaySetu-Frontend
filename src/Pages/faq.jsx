@@ -59,19 +59,27 @@ const Faq = () =>{
 
   return (
     <>
-      <div className="container">
-        <div>
-          <span className="accordion__title">Frequently asked questions</span>
-          <h1 className='h1-faq'>Let's answer some of your questions</h1>
+    <div className='faq-section'>
+      <div className="faq-header">
+         <div className='faq-header-text '>
+         <div className='faq-texts '>
+         <span className="faq-accordion__title">Frequently Asked Questions</span>
+          <h6 className='h1-faq'>Let's answer some of your questions</h6>
+         </div>
+          </div>
+          <div className="faq-header-image">
+         <img src="faq-img.png" alt="faq-img" />
+         </div>
         </div>
+      <div className="faq-container ">
         <div className="accordion__faq">
           { dataCollection.map((item, index) =>
               <div key={index} onClick={() => toggleAccordion(index)}>
                 <div className="accordion__faq-heading">
-                  <h1 className={accordion === index ? "active" : ""}>{item.question}</h1>
+                  <h3 className={accordion === index ? "active" : ""}>{item.question}</h3>
                   <div>
                     {accordion === index ?
-                      <span className="verticle">-</span> : <span className="horizental">+</span>}
+                      <span className="faq-verticle">-</span> : <span className="horizental">+</span>}
                   </div>
                 </div>
                 {/* {console.log({item.answer})} */}
@@ -80,6 +88,7 @@ const Faq = () =>{
             )
           }
         </div>
+      </div>
       </div>
     </>
   );

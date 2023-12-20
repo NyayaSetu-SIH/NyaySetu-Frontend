@@ -1,4 +1,5 @@
 import React ,{useState} from 'react'
+import { Link } from 'react-router-dom';
 import { IoIosNotificationsOutline } from "react-icons/io";
 import "./navbar.css";
 import logoo from '../Login/Assets/logo.png'
@@ -30,7 +31,7 @@ const Navbar = ({user}) => {
     <div>
       <div className="main-nav">
          <div className="logo">
-           <img src={logoo} alt='The logo' className='nyaySetu-logo' onClick={clickback}/>
+           <Link to="/"><img src={logoo} alt='The logo' className='nyaySetu-logo' onClick={clickback}/></Link>
          </div>
         <div >
         <div className="notification">
@@ -53,7 +54,9 @@ const Navbar = ({user}) => {
         </div>
         
         </div>
+        
       </div>
+      <hr/>
     </div>
   )
 }
