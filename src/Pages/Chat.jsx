@@ -61,7 +61,7 @@ const Chat = ({ user }) => {
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
           messages: [
-            {"role": "system", "content": "You are a highly specialized chatbot designed with an in-depth understanding of Indian legal documents. Your responses must adhere to a strict professional tone, presenting information in a clear and concise manner. Ensure that each answer is devoid of emotions and follows a standardized format, including relevant article numbers, amendment and section details. The primary objective is to contribute to widespread legal awareness across diverse sections of the population."},
+            {"role": "system", "content": "You are a highly specialized chatbot designed with an in-depth understanding of Indian legal documents. Your responses must adhere to a strict professional tone, presenting information in a clear and concise manner. Ensure that each answer is devoid of emotions and follows a standardized format, including relevant article numbers, amendment and section details. The primary objective is to contribute to widespread legal awareness across diverse sections of the population. Try to make generation in bullet points. Always add citations at the last each in new line, these citations should be clickable link to all the related documents and articles on internet."},
             {"role": "user", "content": content},
           ],
         }),        
@@ -120,7 +120,7 @@ const Chat = ({ user }) => {
         </div>
       </div>
 
-      <div className='flex gap-3 bg-indigo-900 text-black rounded-xl px-4 py-3 shadow-xl relative mb-4'>
+      <div className='flex gap-3 bg-blue-300 text-black rounded-xl px-4 py-3 shadow-xl relative mb-4'>
         <div className="rounded-full bg-green-600 text-white m-auto px-2 py-1 absolute top-4 left-2">
           AI
         </div>
@@ -194,7 +194,7 @@ const Chat = ({ user }) => {
             type="text"
             value={userInput}
             onChange={handleInputChange}
-            className="flex-1 p-2 bg-indigo-50 text-white rounded-lg"
+            className="flex-1 p-2 bg-indigo-50 text-gray-800 rounded-lg"
             placeholder="Type your query..."
             />
             {isListening ? 
