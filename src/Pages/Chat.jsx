@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
-
+import React, { useState,useEffect } from 'react';
+import useClipboard from "react-use-clipboard";
+import 'regenerator-runtime/runtime';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import tts from 'tts-js';
 const Chat = ({ user }) => {
   const [userInput, setUserInput] = useState('');
+   const [userOut, setUserOut] = useState('');
   const [queryPairs, setQueryPairs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [querySent, setQuerySent] = useState(false);
@@ -13,6 +17,7 @@ const Chat = ({ user }) => {
 
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
+    console.log('here');
   };
 
   const handleDivClick = (query) => {
@@ -23,9 +28,24 @@ const Chat = ({ user }) => {
     setQuerySent(false);
     setQueryPairs([]);
   }
+   const handleSpeak = () => {
+    // console.log(userInp);
+    // tts.speak({ text: userOut });
+    window.responsiveVoice.speak(userOut);
+    //  const utterance = new SpeechSynthesisUtterance(userInp);
+    //  console.log(utterance);
+    //  speechSynthesis.speak(utterance.text);
+  };
 
   const handleSend = async () => {
-    if (userInput.trim() === '') return;
+      let content = userInput.trim();
+
+    if ((voiceText && voiceText.trim() !== '') || (transcript && transcript.trim() !== '')) {
+      content = (voiceText || transcript).trim();
+    }
+    if (content === '') {
+      return;
+    }
 
     try {
       setLoading(true); 
@@ -40,7 +60,7 @@ const Chat = ({ user }) => {
           model: "gpt-3.5-turbo",
           messages: [
             {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": userInput},
+            {"role": "user", "content": content},
           ],
         }),
       });
@@ -52,7 +72,8 @@ const Chat = ({ user }) => {
           ...prevPairs,
           { query: userInput, generatedText: result.choices[0].message.content }
         ]);
-        window.responsiveVoice.speak(result.choices[0].message.content);
+        // window.responsiveVoice.speak(result.choices[0].message.content);
+      setUserOut(result.choices[0].message.content)
       } else {
         // Handle error response
         console.error('Error:', response.statusText);
@@ -107,7 +128,29 @@ const Chat = ({ user }) => {
       </div>
     </div>
   );
+  const [isMicOpen,SetisMicOpen] = useState('off');
 
+  // const [isCopied, setCopied] = useClipboard(copyTxt);
+
+  const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-In' });
+  
+   const stopListening = () => SpeechRecognition.stopListening();
+
+  const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+
+  const [voiceText,setVoiceText] = useState('');
+   useEffect(() => {
+    if (transcript) {
+      setVoiceText(transcript);
+      // You can perform any other operations with transcriptText here
+    }
+  }, [transcript]);
+ 
+
+  const stopSpeak = () =>{
+    
+     console.log(voiceText);
+  }
 
   return (
     <div className="flex h-screen bg-blue-700 text-white">
@@ -150,9 +193,13 @@ const Chat = ({ user }) => {
         </div>
 
         <div className="flex items-center gap-2">
+        <div>
+           <button onClick={startListening}>Click me</button>
+           <button onClick={stopListening}>To stop</button>
+        </div>
             <input
             type="text"
-            value={userInput}
+            value={voiceText || transcript}
             onChange={handleInputChange}
             className="flex-1 p-2 bg-blue-800 text-white rounded-lg"
             placeholder="Type your query..."
@@ -160,6 +207,7 @@ const Chat = ({ user }) => {
             <button onClick={handleSend} className="py-2 px-4 bg-blue-600 rounded-lg">
               {loading ? 'Generating...' : 'Send'}
             </button>
+            <button onClick={() => handleSpeak()}>Speak the ans</button>
         </div>
       </div>
     </div>
