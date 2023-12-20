@@ -84,7 +84,15 @@ const Chat = ({ user }) => {
       if (response.ok) {
         const result = await response.json();
         // Update state with the generated text
-        translateResult(result.choices[0].message.content);
+        if(selectedLang === '' || selectedLang === 'English') {
+          setQueryPairs((prevPairs) => [
+            ...prevPairs,
+            { query: userInput, generatedText: result.choices[0].message.content }
+          ]);
+        } else {
+          translateResult(result.choices[0].message.content);
+        }
+        
         // setQueryPairs((prevPairs) => [
         //   ...prevPairs,
         //   { query: userInput, generatedText: result.choices[0].message.content }
