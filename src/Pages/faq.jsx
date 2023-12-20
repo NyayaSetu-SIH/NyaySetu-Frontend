@@ -68,7 +68,7 @@ const Faq = () =>{
          </div>
           </div>
           <div className="faq-header-image">
-         <img src="faq-img.png" alt="faq-img" />
+         <img src="/faq-img.png" alt="faq-img" />
          </div>
         </div>
       <div className="faq-container ">
