@@ -3,14 +3,13 @@ import '../styles/legalChatbot.css';
 
 const DecisionNode = ({ question, options, handleOptionClick }) => {
   const isLeaf = !options;
-
   return (
     <div className="decision-node">
       <p>{question}</p>
       {!isLeaf && (
         <div className="options">
           {options.map((option, index) => (
-            <button key={index} onClick={() => handleOptionClick(option.action)}>
+            <button key={index} onClick={() => handleOptionClick(option.action, option.label)}>
               {option.label}
             </button>
           ))}
@@ -21,15 +20,17 @@ const DecisionNode = ({ question, options, handleOptionClick }) => {
 };
 
 const LegalChatDecisionTree = () => {
+  const [prevNode, setPrevNode] = useState('');
   const [currentNode, setCurrentNode] = useState(initialDecisionTree);
   const [isLoading, setIsLoading] = useState(false);
-
-  const handleOptionClick = (action) => {
+  const [isSelected, cardSelected] = useState(false);
+  const handleOptionClick = (action, label) => {
     setIsLoading(true);
-
+    cardSelected(true);
     // Simulate a 3-second delay before changing the node
     setTimeout(() => {
       const nextNode = action();
+      setPrevNode(label);
       setCurrentNode(nextNode);
       setIsLoading(false);
     }, 2000);
@@ -40,12 +41,15 @@ const LegalChatDecisionTree = () => {
   }, []);
 
   return (
-    <div className="legal-chat-decision-tree">
-      <DecisionNode {...currentNode} handleOptionClick={handleOptionClick} />
-      {isLoading && <div className="loading">Loading...</div>}
+    <div className="legal-chat-container">
+      <div className="chat-card right-card">
+        <DecisionNode {...currentNode} handleOptionClick={(action, label) => handleOptionClick(action, label)} />
+        {isLoading && <div className="loading">Loading...</div>}
+      </div>
     </div>
   );
 };
+
 
 const initialDecisionTree = {
   question: "Which kind of loss?",

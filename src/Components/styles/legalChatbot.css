@@ -1,55 +1,87 @@
 /* legalChatbot.css */
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .legal-chat-decision-tree {
-    max-width: 500px;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .decision-node {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  p {
-    margin: 0 0 10px;
-  }
-  
-  .options {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  button {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  .loading {
-    margin-top: 10px;
-    color: #555;
-    font-style: italic;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8;
+}
+
+.legal-chat-container {
+  perspective: 1000px; /* Perspective for 3D effect */
+}
+
+.legal-chat-card {
+  width: 60%;
+  padding: 30px;
+  background-color: #f4f4f4;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  transition: transform 0.5s; /* 3D transition effect */
+  transform-style: preserve-3d;
+}
+
+.show-card {
+  transform: rotateY(0deg); /* Initial rotation */
+}
+
+.hide-card {
+  transform: rotateY(180deg); /* Rotate for hiding */
+}
+
+.left-card {
+  color: #333;
+}
+
+.right-card {
+  color: #444;
+}
+
+.decision-node {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+p {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.loading {
+  margin-top: 10px;
+  color: #555;
+  font-style: italic;
+  text-align: center;
+  font-size: 14px;
+}
+
+.prev-node-label {
+  font-weight: bold;
+  font-size: 18px;
+}
