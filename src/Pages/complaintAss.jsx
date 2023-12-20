@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MdFileUpload } from "react-icons/md";
-import '../Style/complaintAss.css'
+import '../Components/Login/Style/complaintAss.css'
 
 const ComplaintAss = () => {
   const [selectedComplaintIndex, setSelectedComplaintIndex] = useState(null);
@@ -8,7 +8,7 @@ const ComplaintAss = () => {
   const complaintsData = [
     {
       title: "Unfair Trade Practice",
-      description: "Details of the complaint related to unfair trade practices.",
+      description: "Details of complaint related to unfair trade practices.",
       linkUrl: "https://consumerhelpline.gov.in/user/signup.php",
       requiredDocuments: ["Document1", "Document2"],
     },
@@ -18,12 +18,12 @@ const ComplaintAss = () => {
       linkUrl: "https://consumerhelpline.gov.in/user/signup.php",
       requiredDocuments: ["Product receipt", "Defect evidence"],
     },
-    {
-      title: "Deficiency in Service",
-      description: "Details of the complaint related to deficiency in services provided.",
-      linkUrl: "https://consumerhelpline.gov.in/user/signup.php",
-      requiredDocuments: ["Service contract", "Communication records"],
-    },
+    // {
+    //   title: "Deficiency in Service",
+    //   description: "Details of complaint related to deficiency in services provided.",
+    //   linkUrl: "https://consumerhelpline.gov.in/user/signup.php",
+    //   requiredDocuments: ["Service contract", "Communication records"],
+    // },
     {
       title: "Theft",
       description: "Details of the complaint related to theft.",
@@ -50,7 +50,7 @@ const ComplaintAss = () => {
     },
     {
       title: "Workplace Harassment",
-      description: "Details of the complaint related to workplace harassment.",
+      description: "Details of complaint related to workplace harassment.",
       linkUrl: "https://labour.gov.in/lodge-your-complaint",
       requiredDocuments: ["HR complaint form", "Communication records"],
     },
@@ -60,12 +60,12 @@ const ComplaintAss = () => {
       linkUrl: "https://labour.gov.in/lodge-your-complaint",
       requiredDocuments: ["Salary records", "Employment contract"],
     },
-    {
-      title: "Salary Not Paid",
-      description: "Details of the complaint related to salary not being paid.",
-      linkUrl: "https://labour.gov.in/lodge-your-complaint",
-      requiredDocuments: ["Salary records", "Employment contract"],
-    },
+    // {
+    //   title: "Salary Not Paid",
+    //   description: "Details of the complaint related to salary not being paid.",
+    //   linkUrl: "https://labour.gov.in/lodge-your-complaint",
+    //   requiredDocuments: ["Salary records", "Employment contract"],
+    // },
   ];
 
   const handleComplaintClick = (index) => {

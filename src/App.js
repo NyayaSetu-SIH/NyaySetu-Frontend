@@ -2,39 +2,42 @@ import React ,{useEffect} from 'react'
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import axios from 'axios'
-import DashR from './Components/Login/dashR';
-import Sidebar from './Components/Login/Sidebar';
+// import Sidebar from './Components/Login/Sidebar';
 // component import
 import Login from './Components/Login/login'
 import Homepage from './Pages/Homepage';
 import Chat from './Pages/Chat';
 import Signup from './Components/Login/signup';
-
+// import Navbar from './Components/Sidebar';
+import ComplaintAss from './Pages/complaintAss';
+import Faq from './Pages/faq';
+import Navbar from './Components/navbar/navbar';
 
 const App = () => {
 
-  // const [User,setUser] = useState(null);
+  const [User,setUser] = useState(null);
 
-  // const getUser = async () =>{
+  const getUser = async () =>{
     
-  //   try {
-  //     const url = 'http://localhost:8000/auth/login/success'
-  //     const {data} =  await axios.get(url ,{withCredentials:true});
-  //     setUser(data.user._json)
+    try {
+      const url = 'http://localhost:8000/auth/login/success'
+      const {data} =  await axios.get(url ,{withCredentials:true});
+      setUser(data.user._json)
       
-  //   } catch (error) {
-  //     console.log(error); 
-  //   }
-  // };
+    } catch (error) {
+      console.log(error); 
+    }
+  };
 
-  // useEffect( () =>{
-  //   getUser();
-  // },[])
+  useEffect( () =>{
+    getUser();
+  },[])
   
   return (
     <BrowserRouter>
       <>
-      {/* <Routes >
+      {User && <Navbar user={User} /> } 
+       <Routes >
         <Route 
           exact
           path='/'
@@ -46,21 +49,25 @@ const App = () => {
           element={<Chat user = {User} />}
          />
          <Route 
+          exact
+          path='/faq'
+          element={<Faq />}
+         />
+         <Route 
+          exact
+          path='/ComplaintAss'
+          element={<ComplaintAss />}
+         />
+         <Route 
            exact
            path='/login'
            element = {User ? <Navigate to="/" /> : <Login />} />
-
           <Route 
            path='/signup'
-           element={User
-            < ? <Navigate to="/" /> : <Signup />} /> 
-       </Routes> */}
-       <div className='contents'>
-       <Sidebar/>
-       <DashR/>
-       </div>
+           element={User ? <Navigate to="/" /> : <Signup />} /> 
+       </Routes>
        </>
-    </BrowserRouter>
+    </BrowserRouter> 
   )
 }
 

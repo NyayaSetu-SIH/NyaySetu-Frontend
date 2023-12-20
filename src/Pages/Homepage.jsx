@@ -1,5 +1,12 @@
 import React from 'react'
-
+import Navbar from '../Components/Sidebar';
+import Faq from './faq';
+import Chat from './Chat';
+import ComplaintAss from './complaintAss';
+import Sidebar from '../Components/Sidebar'
+import './homepage.css'
+import VoiceAss from '../Components/voice-assisstant/voice';
+import { Dashboard } from '../Components/dashboard';
 const Homepage = (userDetails) => {
   const user = userDetails.user;
   const logout = () =>{
@@ -9,15 +16,10 @@ const Homepage = (userDetails) => {
     )
   }
   return (
-    <div>
-       <div>{user.name}</div>
-       <div>{user.email}</div>
-       <div>
-          <img src={user.picture} />
-       </div>
-       <div>
-          <button onClick={logout}>LogOut</button>
-       </div>
+    <div >
+       {/* <Sidebar user={user}/> */}
+       {/* <VoiceAss /> */}
+       <Dashboard/>
     </div>
   )
 }
