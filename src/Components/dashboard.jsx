@@ -6,10 +6,10 @@ export const Dashboard = () => {
   // Define card data with name, route, and description
   const cards = [
     { name: "Nyaysetu chat", route: "/Chat", description: "Chat with Nyaysetu" },
+    { name: "Kyr", route: "/kyr", description: "Find laws related to complaints" },
     { name: "Legal check", route: "/Legal Check", description: "Explore legal checks" },
     { name: "FAQs", route: "/faq", description: "Frequently Asked Questions" },
     { name: "Complaint assistant", route: "/ComplaintAss", description: "Get help with complaints" },
-    { name: "Complain law finder", route: "/analytics", description: "Find laws related to complaints" },
     { name: "Blogs and Articles", route: "/Blogs and Articles", description: "Blogs and articles related to law"}
     // Add more cards as needed
   ];
