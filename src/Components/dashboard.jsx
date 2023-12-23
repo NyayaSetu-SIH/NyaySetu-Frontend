@@ -2,7 +2,7 @@ import React from "react";
 import { FaSearch, FaRegStar } from "react-icons/fa";
 import { Link } from "react-router-dom"; // Make sure to import Link from react-router-dom
 import { FaPlayCircle } from "react-icons/fa";
-export const Dashboard = () => {
+export const Dashboard = (user) => {
   // Define card data with name, route, and description
   const cards = [
     { name: "Nyaysetu chat", route: "/Chat", description: "Chat with Nyaysetu" },
@@ -13,12 +13,12 @@ export const Dashboard = () => {
     { name: "Blogs and Articles", route: "/Blogs and Articles", description: "Blogs and articles related to law"}
     // Add more cards as needed
   ];
-
+  const userDetails = user.user
   return (
     <div className="mx-auto py-8">
       <div className="flex justify-between items-center pt-8">
         <div>
-          <h2 className="font-semibold text-4xl">Hi Mayank</h2>
+          <h2 className="font-semibold text-4xl">Hi {userDetails.name},</h2>
           <p>What would you like to know?</p>
         </div>
         <button className="h-9 px-4 bg-sky-950 text-white rounded-md">Tour <FaPlayCircle /></button>

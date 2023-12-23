@@ -120,6 +120,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  padding-right: 2.1rem;
 }
 
 .avatar {
@@ -142,16 +143,18 @@
 .dropdown-content div{
     font-size: 20px;
     padding-top: 10px;
+    color: black;
 }
 .dropdown-content div:hover{
     font-weight: 600;
 }
 
-.dropdown-content a {
+.dropdown-content  {
   display: block;
-  padding: 0.5rem;
+  /* padding: 0.5r em; */
   text-decoration: none;
   color: #333;
+
 }
 
 .avatar-dropdown:hover .dropdown-content,

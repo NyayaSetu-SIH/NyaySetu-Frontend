@@ -56,7 +56,7 @@ const Navbar = ({user}) => {
 
             {isDropdownOpen && (
               <div className="dropdown-content">
-                <div>Settings</div>
+                <div>Setting</div>
                 <div onClick={logout}>Logout</div>
               </div>
             )}

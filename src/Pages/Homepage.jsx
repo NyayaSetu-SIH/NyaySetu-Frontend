@@ -17,9 +17,7 @@ const Homepage = (userDetails) => {
   }
   return (
     <div >
-       {/* <Sidebar user={user}/> */}
-       {/* <VoiceAss /> */}
-       <Dashboard/>
+       <Dashboard user={user}/>
     </div>
   )
 }
