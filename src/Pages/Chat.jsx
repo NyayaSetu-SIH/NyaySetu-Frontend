@@ -1,5 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import useClipboard from "react-use-clipboard";
+// import { useLocation } from 'react-router-dom';
+import { useHistory,useLocation } from 'react-router-dom';
 import 'regenerator-runtime/runtime';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { FaMicrophone, FaStop, FaVolumeUp, FaPaperPlane, FaArrowUp } from 'react-icons/fa';
@@ -14,6 +16,7 @@ const Chat = ({ user }) => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState('');
+  const [audioContent, setAudioContent] = useState('');
   const [chatHistory, setChatHistory] = useState([
     { id: 1, text: "Can you explain legal liability?", type: 'user' },
     { id: 2, text: "How does intellectual property work?", type: 'user' },
@@ -40,12 +43,16 @@ const Chat = ({ user }) => {
   }
   const handleSpeak = () => {
     setIsSpeaking(true);
-    window.responsiveVoice.speak(userOut);
+    // window.responsiveVoice.speak(userOut);
+    startSpeaking(userOut)
   };
 
   const handleStop = () => {
+    // if(setIsSpeaking) audio.pause();
     setIsSpeaking(false);
-    window.responsiveVoice.cancel();
+    // window.responsiveVoice.cancel();
+   
+    // audioPlayer.currentTime = 0;
   }
 
   const handleLanguageSelect = (lang) => {
@@ -84,20 +91,20 @@ const Chat = ({ user }) => {
       if (response.ok) {
         const result = await response.json();
         // Update state with the generated text
-        //if(selectedLang === '' || selectedLang === 'English') {
+        if(selectedLang === '' || selectedLang === 'English') {
           setQueryPairs((prevPairs) => [
             ...prevPairs,
             { query: userInput, generatedText: result.choices[0].message.content }
           ]);
           setUserOut(result.choices[0].message.content)
-        // } else {
-        //   translateResult(result.choices[0].message.content);
-        // }
+        } else {
+          translateResult(result.choices[0].message.content);
+        }
         
         // setQueryPairs((prevPairs) => [
         //   ...prevPairs,
         //   { query: userInput, generatedText: result.choices[0].message.content }
-        // ]);
+        // ]);  
         // window.responsiveVoice.speak(result.choices[0].message.content);
         //setUserOut(result.choices[0].message.content)
       } else {
@@ -120,7 +127,6 @@ const Chat = ({ user }) => {
     setUserInput('');
     setQuerySent(true);
   };
-
   const translateResult = async (result) => {
     let inputLanguage = "English"
     let outputLanguage = selectedLang;
@@ -193,15 +199,56 @@ const Chat = ({ user }) => {
   );
   // const [isCopied, setCopied] = useClipboard(copyTxt);
 
-  const startListening = () => {
-    setIsListening(true);
+  const startSpeaking = async (voicee) => {
+  const OPENAI_API_KEY = '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'; // Replace with your OpenAI API key
+
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${OPENAI_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: "tts-1",
+      input: voicee,
+      voice: "alloy"
+    }),
+  };
+
+  try {
+    const response = await fetch('https://api.openai.com/v1/audio/speech', requestOptions);
+
+    if (response.ok) {
+      const blob = await response.blob();
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        const base64data = reader.result.split(',')[1];
+        setAudioContent(base64data);
+        playAudio(base64data);
+      };
+    } else {
+      console.error('Error:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+const playAudio = (base64data) => {
+  const audio = new Audio(`data:audio/mp3;base64,${base64data}`);
+  audio.play();
+};
+
+    const startListening = () => {
+      setIsListening(true);
     if(selectedLang === 'Hindi') {
       SpeechRecognition.startListening({ continuous: true, language: 'hi-IN' });
     } else {
       SpeechRecognition.startListening({ continuous: true, language: 'en-In' });
     }
-    
   }
+  
   const stopListening = () => {
     setIsListening(false);
     SpeechRecognition.stopListening();
