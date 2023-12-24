@@ -17,6 +17,7 @@ const Chat = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState('');
   const [audioContent, setAudioContent] = useState('');
+    const [audioPlayer, setAudioPlayer] = useState(new Audio());
   const [chatHistory, setChatHistory] = useState([
     { id: 1, text: "Can you explain legal liability?", type: 'user' },
     { id: 2, text: "How does intellectual property work?", type: 'user' },
@@ -28,7 +29,6 @@ const Chat = ({ user }) => {
     'Marathi', 'Nepali', 'Odia', 'Punjabi', 'Sanskrit', 'Santali', 'Sindhi',
     'Tamil', 'Telugu', 'Urdu'
   ];
-
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
   };
@@ -47,13 +47,6 @@ const Chat = ({ user }) => {
     startSpeaking(userOut)
   };
 
-  const handleStop = () => {
-    // if(setIsSpeaking) audio.pause();
-    setIsSpeaking(false);
-    // window.responsiveVoice.cancel();
-   
-    // audioPlayer.currentTime = 0;
-  }
 
   const handleLanguageSelect = (lang) => {
     setSelectedLang(lang);
@@ -198,10 +191,9 @@ const Chat = ({ user }) => {
     </div>
   );
   // const [isCopied, setCopied] = useClipboard(copyTxt);
-
   const startSpeaking = async (voicee) => {
   const OPENAI_API_KEY = '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'; // Replace with your OpenAI API key
-
+  console.log('hello from startSpeaking');
   const requestOptions = {
     method: 'POST',
     headers: {
@@ -218,14 +210,19 @@ const Chat = ({ user }) => {
   try {
     const response = await fetch('https://api.openai.com/v1/audio/speech', requestOptions);
 
+    
     if (response.ok) {
       const blob = await response.blob();
-      const reader = new FileReader();
-      reader.readAsDataURL(blob);
-      reader.onloadend = () => {
-        const base64data = reader.result.split(',')[1];
-        setAudioContent(base64data);
-        playAudio(base64data);
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = () => {
+          const base64data = reader.result.split(',')[1];
+          setAudioContent(base64data);
+
+          // Create an updated Audio object and play the audio
+          const newAudioPlayer = new Audio(`data:audio/mp3;base64,${base64data}`);
+          setAudioPlayer(newAudioPlayer); // Set the updated audio player
+          newAudioPlayer.play();
       };
     } else {
       console.error('Error:', response.statusText);
@@ -234,12 +231,15 @@ const Chat = ({ user }) => {
     console.error('Error:', error);
   }
 };
-
-const playAudio = (base64data) => {
-  const audio = new Audio(`data:audio/mp3;base64,${base64data}`);
-  audio.play();
-};
-
+  const handleStop = () => {
+    // if(setIsSpeaking) audio.pause();
+    console.log('hii');
+    setIsSpeaking(false);
+    if (audioPlayer && !audioPlayer.paused) {
+    audioPlayer.pause();
+    // audioPlayer.currentTime = 0;
+  }
+  }
     const startListening = () => {
       setIsListening(true);
     if(selectedLang === 'Hindi') {
