@@ -1,9 +1,8 @@
 import React from "react";
 import { FaSearch, FaRegStar } from "react-icons/fa";
-import { Link } from "react-router-dom"; // Make sure to import Link from react-router-dom
+import { Link } from "react-router-dom"; 
 import { FaPlayCircle } from "react-icons/fa";
 export const Dashboard = (user) => {
-  // Define card data with name, route, and description
   const cards = [
     { name: "Nyaysetu chat", route: "/Chat", description: "Chat with Nyaysetu" },
     { name: "Kyr", route: "/kyr", description: "Find laws related to complaints" },
@@ -11,7 +10,6 @@ export const Dashboard = (user) => {
     { name: "FAQs", route: "/faq", description: "Frequently Asked Questions" },
     { name: "Complaint assistant", route: "/ComplaintAss", description: "Get help with complaints" },
     { name: "Blogs and Articles", route: "/Blogs and Articles", description: "Blogs and articles related to law"}
-    // Add more cards as needed
   ];
   const userDetails = user.user
   return (

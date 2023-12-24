@@ -1,11 +1,7 @@
 import React, { useState,useEffect } from 'react';
-import useClipboard from "react-use-clipboard";
-// import { useLocation } from 'react-router-dom';
-import { useHistory,useLocation } from 'react-router-dom';
 import 'regenerator-runtime/runtime';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { FaMicrophone, FaStop, FaVolumeUp, FaPaperPlane, FaArrowUp } from 'react-icons/fa';
-import tts from 'tts-js';
 const Chat = ({ user }) => {
   const [userInput, setUserInput] = useState('');
   const [userOut, setUserOut] = useState('');
@@ -190,7 +186,6 @@ const Chat = ({ user }) => {
       </div>
     </div>
   );
-  // const [isCopied, setCopied] = useClipboard(copyTxt);
   const startSpeaking = async (voicee) => {
   const OPENAI_API_KEY = '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'; // Replace with your OpenAI API key
   console.log('hello from startSpeaking');
@@ -332,11 +327,11 @@ const Chat = ({ user }) => {
               placeholder="Type your query..."
             />
             {isListening ? 
-             <button className='text-sm rounded-full p-2.5' onClick={stopListening}><FaStop /></button> :
-             <button className='text-sm rounded-full p-2.5' onClick={startListening}><FaMicrophone /></button>
+             <button className='text-sm bg-red-500 rounded-full p-2.5' onClick={stopListening}><FaStop /></button> :
+             <button className='text-sm bg-red-500 rounded-full p-2.5' onClick={startListening}><FaMicrophone /></button>
             }
-            {(userOut.length > 0 && isSpeaking) && <button className='text-sm rounded-full p-2.5' onClick={() => handleStop()}><FaStop /></button> }
-            {(userOut.length > 0 && isSpeaking === false) &&  <button className='text-sm rounded-full p-2.5' onClick={() => handleSpeak()}><FaVolumeUp /></button> }
+            {(userOut.length > 0 && isSpeaking) && <button className='text-sm bg-green-300 rounded-full p-2.5' onClick={() => handleStop()}><FaStop /></button> }
+            {(userOut.length > 0 && isSpeaking === false) &&  <button className='text-sm bg-cyan-600 rounded-full p-2.5' onClick={() => handleSpeak()}><FaVolumeUp /></button> }
             <button onClick={handleSend} className="py-2 px-4 bg-blue-600 rounded-lg text-sm">
               {loading ? 'Generating...' : <FaPaperPlane />}
             </button>
