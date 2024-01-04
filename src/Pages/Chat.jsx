@@ -1,7 +1,9 @@
 import React, { useState,useEffect } from 'react';
 import 'regenerator-runtime/runtime';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { FaMicrophone, FaStop, FaVolumeUp, FaPaperPlane, FaArrowUp } from 'react-icons/fa';
+import { FaMicrophone, FaStop, FaVolumeUp, FaPaperPlane } from 'react-icons/fa';
+import SelectedCase from '../Components/DropDownMenu/SelectedCase';
+import SelectedLang from '../Components/DropDownMenu/SelectedLang';
 const Chat = ({ user }) => {
   const [userInput, setUserInput] = useState('');
   const [userOut, setUserOut] = useState('');
@@ -10,21 +12,16 @@ const Chat = ({ user }) => {
   const [querySent, setQuerySent] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState('');
+  // const [isOpen, setIsOpen] = useState(false);
+  const [selectedLang, setSelectedLang] = useState('English');
   const [audioContent, setAudioContent] = useState('');
-    const [audioPlayer, setAudioPlayer] = useState(new Audio());
+  const [audioPlayer, setAudioPlayer] = useState(new Audio());
+  const [selectedOption, setSelectedOption] = useState('All types of Cases');
   const [chatHistory, setChatHistory] = useState([
     { id: 1, text: "Can you explain legal liability?", type: 'user' },
     { id: 2, text: "How does intellectual property work?", type: 'user' },
     { id: 3, text: "What are the steps to file a patent?", type: 'user' },
   ]);
-  const languageOptions = [
-    'Assamese', 'Bengali', 'Bodo', 'Dogri', 'English', 'Gujarati', 'Hindi',
-    'Kannada', 'Kashmiri', 'Konkani', 'Maithili', 'Malayalam', 'Manipuri',
-    'Marathi', 'Nepali', 'Odia', 'Punjabi', 'Sanskrit', 'Santali', 'Sindhi',
-    'Tamil', 'Telugu', 'Urdu'
-  ];
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
   };
@@ -46,7 +43,6 @@ const Chat = ({ user }) => {
 
   const handleLanguageSelect = (lang) => {
     setSelectedLang(lang);
-    setIsOpen(false);
   };
 
   const handleSend = async () => {
@@ -71,7 +67,7 @@ const Chat = ({ user }) => {
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
           messages: [
-            {"role": "system", "content": "You are a highly specialized chatbot designed with an in-depth understanding of Indian legal documents. Your responses must adhere to a strict professional tone, presenting information in a clear and concise manner. Ensure that each answer is devoid of emotions and follows a standardized format, including relevant article numbers, amendment and section details. The primary objective is to contribute to widespread legal awareness across diverse sections of the population. Try to make generation in bullet points. Always add citations at the last each in new line, these citations should be clickable link to all the related documents and articles on internet."},
+            {"role": "system", "content": `You are a highly specialized chatbot designed with an in-depth understanding of Indian legal documents. Your responses must adhere to a strict professional tone, presenting information in a clear and concise manner. Ensure that each answer is devoid of emotions and follows a standardized format, including relevant article numbers, amendment and section details. The primary objective is to contribute to widespread legal awareness across diverse sections of the population. Try to make generation in bullet points. Always add citations at the last each in new line, these citations should be clickable link to all the related documents and articles on internet. give out in ${selectedLang} language only and give response according to ${selectedOption} of cases`},
             {"role": "user", "content": content},
           ],
         }),        
@@ -80,7 +76,7 @@ const Chat = ({ user }) => {
       if (response.ok) {
         const result = await response.json();
         // Update state with the generated text
-        if(selectedLang === '' || selectedLang === 'English') {
+        if(selectedLang === '' || selectedLang) {
           setQueryPairs((prevPairs) => [
             ...prevPairs,
             { query: userInput, generatedText: result.choices[0].message.content }
@@ -187,7 +183,7 @@ const Chat = ({ user }) => {
     </div>
   );
   const startSpeaking = async (voicee) => {
-  const OPENAI_API_KEY = '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'; // Replace with your OpenAI API key
+  const OPENAI_API_KEY = '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'; 
   console.log('hello from startSpeaking');
   const requestOptions = {
     method: 'POST',
@@ -228,7 +224,7 @@ const Chat = ({ user }) => {
 };
   const handleStop = () => {
     // if(setIsSpeaking) audio.pause();
-    console.log('hii');
+    console.log('hello from stopSpeaking');
     setIsSpeaking(false);
     if (audioPlayer && !audioPlayer.paused) {
     audioPlayer.pause();
@@ -256,7 +252,10 @@ const Chat = ({ user }) => {
       setUserInput(transcript);
     }
   }, [transcript]);
- 
+  const handleOptionSelect = (option) => {
+    setSelectedOption(option);
+    console.log('Selected option:', option);
+  }; 
   return (
     <div className="flex h-screen bg-indigo-900 text-white text-lg">
       {/* Left Section - Chat History */}
@@ -279,6 +278,9 @@ const Chat = ({ user }) => {
 
       {/* Right Section - User Input and Chat Interface */}
       <div className="w-3/4 p-4 flex flex-col flex-grow justify-between">
+          <div className='flex justify-end '>
+               <SelectedCase onSelect={handleOptionSelect} />
+          </div>
         <div className="flex flex-col gap-2 overflow-y-auto flex-grow">
             {querySent === false ? (
             <div className="flex flex-col items-center justify-center">
@@ -298,12 +300,13 @@ const Chat = ({ user }) => {
         </div>
         
         <div className="flex items-center gap-2">
-            <div className="relative">
+         <SelectedLang onSelect={handleLanguageSelect} />
+             {/* <div className="relative">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="py-2.5 px-1 bg-blue-600 rounded-lg text-xs w-28"
+                className="flex justify-center py-2.5 px-1 bg-blue-600 rounded-lg text-xs w-28 text-white font-medium"
               >
-                {selectedLang || 'Select Lang'}
+               <span> {selectedLang || 'Select Lang'} </span>
               </button>
               {isOpen && (
                 <div className="absolute bottom-full right-0 z-10 bg-gray-800 p-2 rounded-lg shadow-lg max-h-40 overflow-y-auto w-28">
@@ -317,8 +320,8 @@ const Chat = ({ user }) => {
                     </div>
                   ))}
                 </div>
-              )}
-            </div>
+               )}
+            </div>  */}
             <input
               type="text"
               value={userInput}
