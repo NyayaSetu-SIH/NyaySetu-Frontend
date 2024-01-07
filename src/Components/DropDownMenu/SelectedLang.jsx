@@ -1,28 +1,43 @@
-import React, { useState } from 'react';
-import { IoIosArrowDropupCircle } from "react-icons/io";
+import React, { useState, useRef, useEffect } from 'react';
+import { IoIosArrowDropupCircle } from 'react-icons/io';
 
 const languageOptions = [
-    'Assamese', 'Bengali', 'Bodo', 'Dogri', 'English', 'Gujarati', 'Hindi',
-    'Kannada', 'Kashmiri', 'Konkani', 'Maithili', 'Malayalam', 'Manipuri',
-    'Marathi', 'Nepali', 'Odia', 'Punjabi', 'Sanskrit', 'Santali', 'Sindhi',
-    'Tamil', 'Telugu', 'Urdu'
-  ];
+  'Assamese', 'Bengali', 'Bodo', 'Dogri', 'English', 'Gujarati', 'Hindi',
+  'Kannada', 'Kashmiri', 'Konkani', 'Maithili', 'Malayalam', 'Manipuri',
+  'Marathi', 'Nepali', 'Odia', 'Punjabi', 'Sanskrit', 'Santali', 'Sindhi',
+  'Tamil', 'Telugu', 'Urdu'
+];
 
 const SelectedLang = ({ onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('English');
+  const dropdownRef = useRef(null);
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   const handleOptionSelect = (lang) => {
     setSelectedOption(lang);
-    onSelect(lang); 
+    onSelect(lang);
     setIsOpen(false);
   };
 
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block" ref={dropdownRef}>
       <div>
         <button
           onClick={toggleDropdown}
@@ -30,7 +45,7 @@ const SelectedLang = ({ onSelect }) => {
           className="inline-flex items-center justify-between w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
           <span>{selectedOption}</span>
-          <IoIosArrowDropupCircle  className="ml-1 w-4 h-6" />
+          <IoIosArrowDropupCircle className={`ml-1 w-4 h-6 ${isOpen ? 'transform rotate-180' : ''}`} />
         </button>
       </div>
 
