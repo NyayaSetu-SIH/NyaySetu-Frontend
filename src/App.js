@@ -5,11 +5,11 @@ import axios from 'axios'
 import Login from './Components/Login/login'
 import Homepage from './Pages/Homepage';
 import Chat from './Pages/Chat';
-import Signup from './Components/Login/signup';
 import Faq from './Pages/faq';
 import Navbar from './Components/navbar/navbar';
 import LegalChatDecisionTree from './Components/kyr/kyr'; 
 import ComplaintPage from './Pages/ComplaintPage';
+import Blogs from './Components/BlogsAndArticles/blogs';
 //testing
 import TextSummarize from './Components/TextSummarizer/TextSummarize'
 const App = () => {
@@ -71,9 +71,14 @@ const App = () => {
            path='/summarizer'
            element={<TextSummarize/>}
            />
-          <Route 
+           <Route
+           exact
+           path='/BlogsAndArticles'
+           element={<Blogs/>}
+           />
+          {/* <Route 
            path='/signup'
-           element={User ? <Navigate to="/" /> : <Signup />} /> 
+           element={User ? <Navigate to="/" /> : <Signup />} />  */}
        </Routes>
        </>
     </BrowserRouter> 

@@ -2,6 +2,7 @@ import React from "react";
 import { FaSearch, FaRegStar } from "react-icons/fa";
 import { Link } from "react-router-dom"; 
 import { FaPlayCircle } from "react-icons/fa";
+import Footer from "./Footer/Footer";
 export const Dashboard = (user) => {
   const cards = [
     { name: "Nyaysetu chat", route: "/Chat", description: "Chat with Nyaysetu" },
@@ -9,11 +10,11 @@ export const Dashboard = (user) => {
     { name: "Legal check", route: "/summarizer", description: "Explore legal checks" },
     { name: "FAQs", route: "/faq", description: "Frequently Asked Questions" },
     { name: "Complaint assistant", route: "/ComplaintPage", description: "Get help with complaints" },
-    { name: "Blogs and Articles", route: "/Blogs and Articles", description: "Blogs and articles related to law"}
+    { name: "Blogs and Articles", route: "/BlogsAndArticles", description: "Blogs and articles related to law"}
   ];
   const userDetails = user.user
   return (
-    <div className="mx-auto py-8">
+    <div className="mx-auto pt-8">
       <div className="flex justify-between items-center pt-8 px-2">
         <div>
           <h2 className="font-semibold text-4xl">Hi {userDetails.name},</h2>
@@ -22,7 +23,7 @@ export const Dashboard = (user) => {
         <button className="h-12 px-8 bg-sky-950 text-white rounded-md">Tour <FaPlayCircle /></button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 mb-4">
         {cards.map((card, index) => (
           <Link to={card.route} key={index}>
             <div className="cursor-pointer bg-white border border-gray-300 p-4 rounded-lg hover:shadow-lg transition duration-300">
@@ -36,6 +37,7 @@ export const Dashboard = (user) => {
           </Link>
         ))}
       </div>
+    <Footer />
     </div>
   );
 };
