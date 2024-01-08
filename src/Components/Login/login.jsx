@@ -1,10 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
 import './Style/login.css'
 import logo from './Assets/logo.png'
 import login_img from './Assets/login-img.svg'
-import gLogo from './Assets/google-logo.png'
 const login = () => {
  
   const googleAuth = () =>{
@@ -41,18 +38,18 @@ const login = () => {
                       </div>
                       </div>
 
-                      <div className='secondary-div-or'>OR</div>
+                      {/* <div className='secondary-div-or'>OR</div>
                       <div className='d-flex justify-content-center'>
                       <div className='d-flex justify-content-center flex-col secondary-div-content'>
                          <div className='sec-div-text'>
                             <Link to="/signup">Continue with Email</Link>
                          </div>
                       </div>
-                      </div>
+                      </div> */}
 
-                      <div className='sec-text'>
+                      {/* <div className='sec-text'>
                         <p> We'll send a unique login link to your email to ensure a hassle-free sign-in without compromising security.</p>
-                      </div>
+                      </div> */}
                    </div>    
                  </div>
               </div>
