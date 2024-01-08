@@ -9,7 +9,9 @@ import Signup from './Components/Login/signup';
 import Faq from './Pages/faq';
 import Navbar from './Components/navbar/navbar';
 import LegalChatDecisionTree from './Components/kyr/kyr'; 
-
+import ComplaintPage from './Pages/ComplaintPage';
+//testing
+import TextSummarize from './Components/TextSummarizer/TextSummarize'
 const App = () => {
 
   const [User,setUser] = useState(null);
@@ -45,6 +47,11 @@ const App = () => {
           path='/chat'
           element={<Chat user = {User} />}
          />
+          <Route 
+          exact
+          path='/complaintPage'
+          element={<ComplaintPage user = {User} />}
+         />
          <Route 
           exact
           path='/faq'
@@ -58,6 +65,11 @@ const App = () => {
            exact
            path='/kyr'
            element={<LegalChatDecisionTree/>}
+           />
+           <Route
+           exact
+           path='/summarizer'
+           element={<TextSummarize/>}
            />
           <Route 
            path='/signup'

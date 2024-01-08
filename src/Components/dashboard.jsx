@@ -6,20 +6,20 @@ export const Dashboard = (user) => {
   const cards = [
     { name: "Nyaysetu chat", route: "/Chat", description: "Chat with Nyaysetu" },
     { name: "Kyr", route: "/kyr", description: "Find laws related to complaints" },
-    { name: "Legal check", route: "/Legal Check", description: "Explore legal checks" },
+    { name: "Legal check", route: "/summarizer", description: "Explore legal checks" },
     { name: "FAQs", route: "/faq", description: "Frequently Asked Questions" },
-    { name: "Complaint assistant", route: "/ComplaintAss", description: "Get help with complaints" },
+    { name: "Complaint assistant", route: "/ComplaintPage", description: "Get help with complaints" },
     { name: "Blogs and Articles", route: "/Blogs and Articles", description: "Blogs and articles related to law"}
   ];
   const userDetails = user.user
   return (
     <div className="mx-auto py-8">
-      <div className="flex justify-between items-center pt-8">
+      <div className="flex justify-between items-center pt-8 px-2">
         <div>
           <h2 className="font-semibold text-4xl">Hi {userDetails.name},</h2>
           <p>What would you like to know?</p>
         </div>
-        <button className="h-9 px-4 bg-sky-950 text-white rounded-md">Tour <FaPlayCircle /></button>
+        <button className="h-12 px-8 bg-sky-950 text-white rounded-md">Tour <FaPlayCircle /></button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
