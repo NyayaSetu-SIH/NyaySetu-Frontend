@@ -1,16 +1,17 @@
 import React from "react";
 import { FaSearch, FaRegStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom"; 
 import { FaPlayCircle } from "react-icons/fa";
 import Footer from "./Footer/Footer";
 export const Dashboard = (user) => {
   const cards = [
-    { name: "Nyaysetu chat", route: "/Chat", description: "Chat with Nyaysetu" },
-    { name: "Kyr", route: "/kyr", description: "Find laws related to complaints" },
-    { name: "Legal check", route: "/summarizer", description: "Explore legal checks" },
-    { name: "FAQs", route: "/faq", description: "Frequently Asked Questions" },
-    { name: "Complaint assistant", route: "/ComplaintPage", description: "Get help with complaints" },
-    { name: "Blogs and Articles", route: "/BlogsAndArticles", description: "Blogs and articles related to law"}
+    { name: "Nyaysetu chat", route: "/Chat", description: "Chat with Nyaysetu",isNyaysetu: true },
+    { name: "Kyr", route: "/kyr", description: "Find laws related to complaints",isNyaysetu: false },
+    { name: "Legal check", route: "/summarizer", description: "Explore legal checks",isNyaysetu: false },
+    { name: "FAQs", route: "/faq", description: "Frequently Asked Questions",isNyaysetu: false },
+    { name: "Complaint assistant", route: "/ComplaintPage", description: "Get help with complaints",isNyaysetu: false },
+    { name: "Blogs and Articles", route: "/BlogsAndArticles", description: "Blogs and articles related to law",isNyaysetu: false}
   ];
   const userDetails = user.user
   return (
@@ -29,7 +30,11 @@ export const Dashboard = (user) => {
             <div className="cursor-pointer bg-white border border-gray-300 p-4 rounded-lg hover:shadow-lg transition duration-300">
               <div className="flex items-center justify-between mb-4">
                 <FaSearch className="text-md mr-2" />
-                <FaRegStar className="text-md" />
+                {card.isNyaysetu ? (
+                  <FaStar className="text-lg" fill="yellow" />
+                ) : (
+                  <FaRegStar className="text-lg" />
+                )}
               </div>
               <h3 className="text-lg font-semibold mb-2">{card.name}</h3>
               <p>{card.description}</p>
