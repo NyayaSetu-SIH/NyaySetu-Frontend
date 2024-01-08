@@ -30,7 +30,7 @@ const TextSummarize = () => {
         }
       });
 
-      setSummary(response.data); 
+      setSummary(response.data.result); 
       setIsGenerating(false);// Update the state with the summary received from the backend
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -137,7 +137,7 @@ const TextSummarize = () => {
       {summary && (
         <div style={{ marginTop: '20px', backgroundColor: '#f9f9f9', padding: '20px', borderRadius: '5px' }}>
           <h2>Summary:</h2>
-          <p style={{ fontSize: '14px', lineHeight: '1.5' }}>{summary.result}</p>
+          <p style={{ fontSize: '14px', lineHeight: '1.5' }}>{summary}</p>
         </div>
       )}
     </div>
