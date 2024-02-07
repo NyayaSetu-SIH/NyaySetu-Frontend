@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# NyaySetu Web Application 🌐
+#### Indian Legal System GenAI Chatbot 🤖
+## Overview 
+NyaySetu is a web application developed by Team NyaySetu during the Smart India Hackathon 2023 Grand Finale. Although not securing the top spot, the experience was enriching and led to the creation of this innovative solution.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Nyaysetu chat demo in English](https://media.licdn.com/dms/image/D5622AQHDSc9cSvqgiQ/feedshare-shrink_2048_1536/0/1704569735637?e=1710374400&v=beta&t=AQ0JQs4kRa1Rn4497LSxOGIBjuwx3MLsGAAULdC_KaY)
+![Nyaysetu chat demo in English](https://media.licdn.com/dms/image/D5622AQGb--ln1DFjLQ/feedshare-shrink_2048_1536/0/1704569736316?e=1710374400&v=beta&t=HIf5Srt-DJj5SGpVbMvUsHshKxC-0jtyLRyfz1AudrQ)
 
-## Available Scripts
+## Team Members 👥
+- Chandan Mishra
+- Mayank Johari
+- Aman Gupta
+- Satvik Maheshwari
+- Somya Maheshwari
+- Shambhavi Rai
 
-In the project directory, you can run:
+## Key Features 🔑
+- 🗣️ Voice assistant in multiple languages, catering to marginalized communities with limited literacy skills.
+- 🌐 Multilingual support for diverse user interactions.
+- 📚 Citations for comprehensive and accurate legal references.
+- 🤖 GPT fine-tuned for the Indian legal system.
+- ⚖️ Select cases functionality, offering support for various legal scenarios.
 
-### `npm start`
+## Tech Used 💻
+- GPT 3.5
+- HuggingFace
+- Bhashini API
+- Whisper.ai
+- React.js
+- Node.js
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Video Demo 📽️
+To watch the demo and explore the app's capabilities, click [here](https://drive.google.com/file/d/1xVWZsKzuACTHg_QsnrDT2GRU4ruxltTY/view).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+In the video demo, Hindi was selected as the language, and the microphone button was clicked to seamlessly communicate queries in Hindi. The AI responded in Hindi, and with a click on the speaker button, the response was spoken aloud in the same language.
 
-### `npm test`
+## Acknowledgments 🙏
+- We thank Smart India Hackathon 2023 for providing us with this platform to showcase our skills and creativity.
+- Special thanks to the organizers, mentors, and industry experts for their guidance and support throughout the event.
+- Gratitude to all team members for their dedication and hard work.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contact 📧
+For more information or to explore a demo, feel free to reach out to [Team NyaySetu](mailto:imchandan1947@gmail.com).
